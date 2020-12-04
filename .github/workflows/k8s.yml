@@ -34,6 +34,6 @@ jobs:
           file: ./Tailspin.SpaceGame.Web/Dockerfile
           push: true
           tags: |
-            ${{ github.repository_owner }}/tailspinweb:latest
-            ${{ github.repository_owner }}/tailspinweb:1.0.0
+            canarysplayground/tailspinweb:latest
+            canarysplayground/tailspinweb:${{ github.run_number }}
 
