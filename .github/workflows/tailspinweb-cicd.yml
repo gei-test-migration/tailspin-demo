@@ -4,7 +4,7 @@ on:
   push:
     branches: [ master ]
     paths:
-      - .github/workflows/tailspinwebk8s.yml
+      - .github/workflows/tailspinweb-cicd.yml
       - Tailspin.SpaceGame.Web/**
   workflow_dispatch:
   
