@@ -1,3 +1,4 @@
+LABEL org.opencontainers.image.source https://github.com/CanarysPlayground/tailspin-k8s
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
 WORKDIR /app
 EXPOSE 80
