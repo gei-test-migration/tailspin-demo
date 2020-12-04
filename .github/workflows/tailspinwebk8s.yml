@@ -1,8 +1,11 @@
-name: CI 
+name: Tailspin Web CI/CD
 
 on:
   push:
     branches: [ master ]
+    paths:
+      - .github/workflows/tailspinwebk8s.yml
+      - Tailspin.SpaceGame.Web/**
   workflow_dispatch:
   
 jobs:
