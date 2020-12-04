@@ -43,7 +43,9 @@ jobs:
           push: true
           tags: |
             ghcr.io/canarysplayground/tailspinweb:latest
-            ghcr.io/canarysplayground/tailspinweb:${{ steps.date.outputs.date }}.${{ github.run_number }}
-       
+            ghcr.io/canarysplayground/tailspinweb:$TAG_NUMBER
+        env:
+          TAG_NUMBER: ${{ steps.date.outputs.date }}.${{ github.run_number }}
+          
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
