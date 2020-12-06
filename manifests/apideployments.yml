@@ -13,7 +13,7 @@ spec:
         app: spacegameleaderboard
     spec:
       containers:
-        - name: leaderboard
+        - name: spacegameleaderboard
           image: ghcr.io/canarysplayground/spacegameleaderboard
           ports:
           - containerPort: 80
