@@ -6,7 +6,7 @@ on:
     paths:
       - .github/workflows/tailspinweb-cicd.yml
       - Tailspin.SpaceGame.Web/**
-      - manifests/**
+      - manifests/webdeployments.yml
   workflow_dispatch:
   
 jobs:
