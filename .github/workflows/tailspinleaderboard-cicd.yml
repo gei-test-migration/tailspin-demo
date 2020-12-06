@@ -78,7 +78,7 @@ jobs:
         container-registry-url: ghcr.io
         container-registry-username: ${{ github.repository_owner }}
         container-registry-password: ${{ secrets.CR_PAT }}
-        secret-name: ${{ github.repository_owner }}-registry-connection
+        secret-name: canarysplayground-registry-connection
         
     - name: Deploy to Kubernetes cluster
       uses: Azure/k8s-deploy@v1
