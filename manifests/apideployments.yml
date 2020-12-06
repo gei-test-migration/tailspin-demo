@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: spacegameleaderboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spacegameleaderboard
+  template:
+    metadata:
+      labels:
+        app: spacegameleaderboard
+    spec:
+      containers:
+        - name: leaderboard
+          image: ghcr.io/canarysplayground/spacegameleaderboard
+          ports:
+          - containerPort: 80
