@@ -2,10 +2,11 @@ name: Tailspin Web CI/CD
 
 on:
   push:
-    branches: [ testdeployments ]
+    branches: [ master ]
     paths:
       - .github/workflows/tailspinweb-cicd.yml
       - Tailspin.SpaceGame.Web/**
+      - manifests/**
   workflow_dispatch:
   
 jobs:
