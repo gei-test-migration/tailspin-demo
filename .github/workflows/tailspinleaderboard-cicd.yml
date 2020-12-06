@@ -2,10 +2,11 @@ name: Tailspin Leaderboard CI/CD
 
 on:
   push:
-    branches: [ testdeployments ]
+    branches: [ master ]
     paths:
       - .github/workflows/tailspinleaderboard-cicd.yml
       - Tailspin.SpaceGame.LeaderboardContainer/**
+      - manifests/apideployments.yml
   workflow_dispatch:
   
 jobs:
