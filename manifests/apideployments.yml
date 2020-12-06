@@ -24,7 +24,7 @@ kind: Service
 metadata:
     name: spacegameleaderboard
 spec:
-    type: LoadBalancer
+    type: ClusterIP
     ports:
     - port: 80 
     selector:
