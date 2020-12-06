@@ -71,6 +71,14 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
         resource-group: tailspin-k8s
         cluster-name: tailspin-space
+    
+    - uses: azure/k8s-create-secret@v1
+      name: Create imagepullsecret for ACR
+      with:
+        container-registry-url: ghcr.io
+        container-registry-username: ${{ github.repository_owner }}
+        container-registry-password: ${{ secrets.CR_PAT }}
+        secret-name: ${{ github.repository_owner }}-registry-connection
         
     - name: Deploy to Kubernetes cluster
       uses: Azure/k8s-deploy@v1
