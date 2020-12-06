@@ -84,5 +84,7 @@ jobs:
       uses: Azure/k8s-deploy@v1
       with:       
         manifests: manifests/apideployments.yml      
-        images: ghcr.io/canarysplayground/spacegameleaderboard:latest
+        images: ghcr.io/canarysplayground/spacegameleaderboard:${{ steps.date.outputs.date }}.${{ github.run_number }}
+        imagepullsecrets: |
+          canarysplayground-registry-connection
         force: true
