@@ -15,6 +15,9 @@ spec:
       containers:
         - name: spacegameweb
           image: ghcr.io/canarysplayground/spacegameweb:${{ steps.date.outputs.date }}.${{ github.run_number }}
+          env:
+          - name: LeaderboardFunctionUrl
+            value: http://spacegameleaderboard.default.svc.cluster.local
           ports:
           - containerPort: 80
 ---
