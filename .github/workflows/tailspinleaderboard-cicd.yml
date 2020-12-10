@@ -50,7 +50,7 @@ jobs:
         run: echo ${{ steps.docker_build.outputs.digest }}
         
  AKS_deploy:
-    name: Deploy
+    name: DEPLOY TO AKS
     runs-on: ubuntu-latest
     needs: dockerpush
     steps:
