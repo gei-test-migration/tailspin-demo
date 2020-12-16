@@ -28,14 +28,15 @@ jobs:
       
     - name: Test
       run: dotnet test --no-build --verbosity normal
-      working-directory: .//Tailspin.SpaceGame.Web
+      working-directory: ./Tailspin.SpaceGame.Web
     
     - name: Publish
       run: dotnet publish --no-restore -c Release
+      working-directory: ./Tailspin.SpaceGame.Web
     
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.2.1
       with:
         name: drop
-        path: ./Tailspin.SpaceGame.Web/app/publish
+        path: ./Tailspin.SpaceGame.Web/bin/Release/netcoreapp3.1/publish/
     
