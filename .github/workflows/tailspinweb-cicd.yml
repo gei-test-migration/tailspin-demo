@@ -93,7 +93,7 @@ jobs:
         run: echo ${{ steps.docker_build.outputs.digest }}
 
   appservicedeploy:
-    name: AZUPE APP SERVICE DEPLOY
+    name: AZURE APP SERVICE DEPLOY
     runs-on: ubuntu-latest
     environment: 
       name: Web App
