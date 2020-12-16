@@ -96,7 +96,7 @@ jobs:
     name: AZUPE APP SERVICE DEPLOY
     runs-on: ubuntu-latest
     environment: 
-      name: Azure App Service
+      name: Web App
       url: https://spacewebgh.azurewebsites.net/
     needs:
     - build
