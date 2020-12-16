@@ -23,6 +23,13 @@ jobs:
       with:
         dotnet-version: 3.1.301
         
+    - name: Configure App Settings
+      uses: cschleiden/replace-tokens@v1
+      with: 
+       files: '["Tailspin.SpaceGame.Web/appsettings.json"]'
+      env:
+       LEADER_BOARD_FUNCTION_URL: https://leaderboardsgh.azurewebsites.net/api/Leaderboard
+        
     - name: Restore dependencies
       run: dotnet restore
       working-directory: ./Tailspin.SpaceGame.Web
