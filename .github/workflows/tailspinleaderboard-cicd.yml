@@ -89,7 +89,7 @@ jobs:
     name: AZUPE APP SERVICE DEPLOY
     runs-on: ubuntu-latest
     environment: 
-      name: Azure App Service
+      name: API App
       url: https://leaderboardsgh.azurewebsites.net/api/Leaderboard
     needs:
     - build
