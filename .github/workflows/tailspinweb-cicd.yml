@@ -8,6 +8,8 @@ on:
       - Tailspin.SpaceGame.Web/**
       - manifests/webdeployments.yml
   workflow_dispatch:
+  release:
+    types: [published]
   
 jobs:
   build:
@@ -89,14 +91,42 @@ jobs:
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
 
-  AKS_deploy:
-    name: Deploy
-    environment: AKS Cluster
+  appservicedeploy:
+    name: AZUPE APP SERVICE DEPLOY
     runs-on: ubuntu-latest
-    needs: 
+    environment: 
+      name: Azure App Service
+      url: https://spacewebgh.azurewebsites.net/
+    needs:
     - build
     - dockerpush
     steps:
+      
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v2.0.7
+      with:
+        name: drop
+        
+    - name: Azure Login
+      uses: Azure/login@v1.1
+      with:
+        creds: ${{ secrets.AZURE_CREDS }}
+        
+    - name: Azure WebApp
+      uses: Azure/webapps-deploy@v2
+      with:
+        app-name: spacewebgh
+        package: .
+        
+  AKS_deploy:
+    name: AKS DEPLOY
+    environment: 
+      name: AKS Cluster
+      url: pod-ip
+    runs-on: ubuntu-latest
+    needs: appservicedeploy
+    steps:
+    
     - name: Checkout
       uses: actions/checkout@v2   
     
@@ -107,12 +137,12 @@ jobs:
     - name: Azure Login
       uses: Azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        creds: ${{ secrets.AZURE_CREDS }}
   
     - name: Azure Kubernetes set context
       uses: Azure/aks-set-context@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        creds: ${{ secrets.AZURE_CREDS }}
         resource-group: tailspin-k8s
         cluster-name: tailspin-space
     
