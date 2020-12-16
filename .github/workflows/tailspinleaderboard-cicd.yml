@@ -90,6 +90,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: Azure App Service
+      url: https://leaderboardsgh.azurewebsites.net/api/Leaderboard
     needs:
     - build
     - dockerpush
@@ -128,12 +129,12 @@ jobs:
     - name: Azure Login
       uses: Azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        creds: ${{ secrets.AZURE_CREDS }}
   
     - name: Azure Kubernetes set context
       uses: Azure/aks-set-context@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        creds: ${{ secrets.AZURE_CREDS }}
         resource-group: tailspin-k8s
         cluster-name: tailspin-space
     
