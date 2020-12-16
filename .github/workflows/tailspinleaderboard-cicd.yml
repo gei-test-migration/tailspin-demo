@@ -13,8 +13,7 @@ on:
 jobs:
  dockerpush:
     name: DOCKER BUILD & PUSH
-    runs-on: ubuntu-latest
-    
+    runs-on: ubuntu-latest    
     steps:
       
       - name: Checkout
@@ -45,8 +44,8 @@ jobs:
           file: ./Tailspin.SpaceGame.LeaderboardContainer/Dockerfile
           push: true
           tags: |
-            ghcr.io/canarysplayground/spacegameleaderboard:latest
-            ghcr.io/canarysplayground/spacegameleaderboard:${{ steps.date.outputs.date }}.${{ github.run_number }}
+            ghcr.io/grenston/spacegameleaderboard:latest
+            ghcr.io/grenston/spacegameleaderboard:${{ steps.date.outputs.date }}.${{ github.run_number }}
        
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
@@ -82,13 +81,13 @@ jobs:
         container-registry-url: ghcr.io
         container-registry-username: ${{ github.repository_owner }}
         container-registry-password: ${{ secrets.CR_PAT }}
-        secret-name: canarysplayground-registry-connection
+        secret-name: grenston-registry-connection
         
     - name: Deploy to Kubernetes cluster
       uses: Azure/k8s-deploy@v1
       with:       
         manifests: manifests/apideployments.yml      
-        images: ghcr.io/canarysplayground/spacegameleaderboard:${{ steps.date.outputs.date }}.${{ github.run_number }}
+        images: ghcr.io/grenston/spacegameleaderboard:${{ steps.date.outputs.date }}.${{ github.run_number }}
         imagepullsecrets: |
-          canarysplayground-registry-connection
+          grenston-registry-connection
         force: true
