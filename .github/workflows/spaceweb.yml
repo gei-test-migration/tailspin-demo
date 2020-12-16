@@ -42,7 +42,9 @@ jobs:
         
   DEPLOY:
     runs-on: ubuntu-latest
-    environment: Azure App Service
+    environment: 
+      name: Azure App Service
+      url: https://spacewebgh.azurewebsites.net/
     needs: [BUILD]
     steps:
       
