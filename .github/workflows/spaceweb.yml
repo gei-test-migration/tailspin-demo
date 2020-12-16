@@ -51,10 +51,14 @@ jobs:
       with:
         name: drop
         
+    - name: Azure Login
+      uses: Azure/login@v1.1
+      with:
+        creds: ${{ secrets.AZURE_CREDS }}
+        
     - name: Azure WebApp
       uses: Azure/webapps-deploy@v2
       with:
         app-name: spacewebgh
-        publish-profile: ${{ secrets.PUBLISH_PROFILE }}
         package: .
     
