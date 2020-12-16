@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: spacegameleaderboard
-          image: ghcr.io/canarysplayground/spacegameleaderboard:${{ steps.date.outputs.date }}.${{ github.run_number }}
+          image: ghcr.io/grenston/spacegameleaderboard:${{ steps.date.outputs.date }}.${{ github.run_number }}
           ports:
           - containerPort: 80
 ---
