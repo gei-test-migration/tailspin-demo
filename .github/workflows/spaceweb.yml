@@ -31,7 +31,7 @@ jobs:
       working-directory: .//Tailspin.SpaceGame.Web
     
     - name: Publish
-      run: dotnet publish --no-restore -c Release -o /app/pubish
+      run: dotnet publish --no-restore -c Release
     
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.2.1
