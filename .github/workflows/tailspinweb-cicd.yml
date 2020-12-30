@@ -3,8 +3,8 @@ name: Tailspin Web CI/CD
 on: 
   workflow_dispatch:
     inputs:
-      aks_deploy:
-        description: 'Deploy to AKS'     
+      deploy_or_not:
+        description: 'Want to deploy? (true/false)'     
         required: true
         default: false
   release:
@@ -99,6 +99,7 @@ jobs:
 
   appservicedeploy:
     name: AZURE APP SERVICE DEPLOY
+    if: github.event.inputs.deploy_or_not == 'true'
     runs-on: ubuntu-latest
     environment: 
       name: Web App
@@ -126,7 +127,7 @@ jobs:
         
   AKS_deploy:
     name: AKS DEPLOY
-    if: ${{ github.event.inputs.aks_deploy }} == 'true'
+    if: github.event.inputs.deploy_or_not == 'true'
     environment: 
       name: AKS Cluster
       url: pod-ip
