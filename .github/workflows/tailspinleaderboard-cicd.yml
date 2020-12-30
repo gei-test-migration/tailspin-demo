@@ -121,7 +121,7 @@ jobs:
         
   AKS_deploy:
     name: AKS DEPLOY
-    if: ${{ github.event.inputs.aks_deploy }} == true
+    if: ${{ github.event.inputs.aks_deploy }} == 'true'
     environment: AKS Cluster
     runs-on: ubuntu-latest
     needs: appservicedeploy
