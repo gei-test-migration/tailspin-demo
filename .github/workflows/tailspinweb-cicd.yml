@@ -1,7 +1,15 @@
 name: Tailspin Web CI/CD
 
-on:
+on: 
   workflow_dispatch:
+    inputs:
+      aks_deploy:
+        description: 'Deploy to AKS'     
+        required: true
+        default: false
+        type: boolean
+      tags:
+        description: 'Test scenario tags'
   release:
     types: [published]
   
@@ -121,6 +129,7 @@ jobs:
         
   AKS_deploy:
     name: AKS DEPLOY
+    if: ${{ github.event.inputs.aks_deploy }} == true
     environment: 
       name: AKS Cluster
       url: pod-ip
