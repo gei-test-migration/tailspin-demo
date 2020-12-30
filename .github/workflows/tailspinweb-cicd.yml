@@ -7,7 +7,6 @@ on:
         description: 'Deploy to AKS'     
         required: true
         default: false
-        type: boolean
   release:
     types: [published]
   
