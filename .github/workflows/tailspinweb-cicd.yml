@@ -8,8 +8,6 @@ on:
         required: true
         default: false
         type: boolean
-      tags:
-        description: 'Test scenario tags'
   release:
     types: [published]
   
