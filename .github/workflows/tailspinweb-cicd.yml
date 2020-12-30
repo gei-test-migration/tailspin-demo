@@ -127,7 +127,7 @@ jobs:
         
   AKS_deploy:
     name: AKS DEPLOY
-    if: ${{ github.event.inputs.aks_deploy }} == true
+    if: ${{ github.event.inputs.aks_deploy }} == 'true'
     environment: 
       name: AKS Cluster
       url: pod-ip
