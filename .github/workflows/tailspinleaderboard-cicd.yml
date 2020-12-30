@@ -93,6 +93,7 @@ jobs:
  
   appservicedeploy:
     name: AZURE APP SERVICE DEPLOY
+    if: ${{ github.event.inputs.aks_deploy }} == true
     runs-on: ubuntu-latest
     environment: 
       name: API App
