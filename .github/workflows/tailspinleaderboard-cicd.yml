@@ -9,6 +9,12 @@ on:
       - Tailspin.SpaceGame.LeaderboardContainer/**
       - manifests/apideployments.yml
   workflow_dispatch:
+    inputs:
+        aks_deploy:
+          description: 'Deploy to AKS'     
+          required: true
+          default: false
+          type: boolean
   release:
     types: [published]
   
@@ -114,6 +120,7 @@ jobs:
         
   AKS_deploy:
     name: AKS DEPLOY
+    if: ${{ github.event.inputs.aks_deploy }} == true
     environment: AKS Cluster
     runs-on: ubuntu-latest
     needs: appservicedeploy
