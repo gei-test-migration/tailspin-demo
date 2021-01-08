@@ -6,7 +6,7 @@ on:
       deploy_or_not:
         description: 'Want to deploy? (true/false)'     
         required: true
-        default: false
+        default: true
   release:
     types: [published]
   
