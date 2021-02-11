@@ -38,12 +38,12 @@ jobs:
         id: date
         run: echo "::set-output name=date::$(date +'%Y.%m.%d')"
       
-      # - name: Configure App Settings
-      #   uses: cschleiden/replace-tokens@v1
-      #   with: 
-      #    files: '["Tailspin.SpaceGame.Web/appsettings.json"]'
-      #   env:
-      #    LEADER_BOARD_FUNCTION_URL: 'http://10.0.214.25'
+      - name: Configure App Settings
+        uses: cschleiden/replace-tokens@v1
+        with: 
+         files: '["Tailspin.SpaceGame.Web/appsettings.json"]'
+        env:
+         LEADER_BOARD_FUNCTION_URL: ${{secrets.API_CLUSTER_IP}}
 
       - name: Build and push
         id: docker_build
