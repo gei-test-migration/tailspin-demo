@@ -63,6 +63,7 @@ jobs:
     name: AKS DEPLOY
     environment: 
       name: AKS Cluster
+      url: http://52.188.25.119/
     runs-on: ubuntu-latest
     needs: dockerpush
     steps:
