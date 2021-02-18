@@ -9,8 +9,6 @@ on:
       - Tailspin.SpaceGame.LeaderboardContainer/**
       - manifests/apideployments.yml
   workflow_dispatch:
-  release:
-    types: [published]
   
 jobs:
   dockerpush:
