@@ -39,7 +39,7 @@ jobs:
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.1
         with:
-          name: drop
+          name: spacegameleaderboard
           path: ./Tailspin.SpaceGame.LeaderboardContainer/bin/Release/netcoreapp3.1/publish/
 
 
@@ -80,7 +80,7 @@ jobs:
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.1
         with:
-          name: drop
+          name: spacegameweb
           path: ./Tailspin.SpaceGame.Web/bin/Release/netcoreapp3.1/publish/
 
 
@@ -97,7 +97,7 @@ jobs:
       - name: Download a Build Artifact
         uses: actions/download-artifact@v2.0.7
         with:
-          name: drop
+          name: spacegameleaderboard
           
       - name: Azure Login
         uses: Azure/login@v1.1
@@ -124,7 +124,7 @@ jobs:
       - name: Download a Build Artifact
         uses: actions/download-artifact@v2.0.7
         with:
-          name: drop
+          name: spacegameweb
           
       - name: Azure Login
         uses: Azure/login@v1.1
