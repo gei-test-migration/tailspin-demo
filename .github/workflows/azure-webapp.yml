@@ -84,31 +84,31 @@ jobs:
           path: ./Tailspin.SpaceGame.Web/bin/Release/netcoreapp3.1/publish/
 
 
-      api_app_deploy:
-        name: DEPLOY API APP
-        runs-on: ubuntu-latest
-        environment: 
-          name: API App
-          url: https://${{env.API_APP_NAME}}.azurewebsites.net/api/Leaderboard
-        needs:
-        - build_api_app
-        steps:
+    api_app_deploy:
+      name: DEPLOY API APP
+      runs-on: ubuntu-latest
+      environment: 
+        name: API App
+        url: https://${{env.API_APP_NAME}}.azurewebsites.net/api/Leaderboard
+      needs:
+      - build_api_app
+      steps:
+        
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v2.0.7
+        with:
+          name: drop
           
-        - name: Download a Build Artifact
-          uses: actions/download-artifact@v2.0.7
-          with:
-            name: drop
-            
-        - name: Azure Login
-          uses: Azure/login@v1.1
-          with:
-            creds: ${{ secrets.AZURE_CREDS }}
-            
-        - name: Azure WebApp
-          uses: Azure/webapps-deploy@v2
-          with:
-            app-name: ${{env.API_APP_NAME}}
-            package: .
+      - name: Azure Login
+        uses: Azure/login@v1.1
+        with:
+          creds: ${{ secrets.AZURE_CREDS }}
+          
+      - name: Azure WebApp
+        uses: Azure/webapps-deploy@v2
+        with:
+          app-name: ${{env.API_APP_NAME}}
+          package: .
 
 
     web_app_deploy:
