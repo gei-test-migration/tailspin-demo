@@ -6,6 +6,7 @@ on:
 
 env:
   API_APP_NAME: 'leaderboardsgh'
+  WEB_APP_NAME: 'spacewebgh'
 
 jobs:
     build_api_app:
@@ -40,15 +41,84 @@ jobs:
         with:
           name: drop
           path: ./Tailspin.SpaceGame.LeaderboardContainer/bin/Release/netcoreapp3.1/publish/
-    
-    api_app_deploy:
-      name: DEPLOY API APP
+
+
+    build_web_app:
+      name: DOTNET BUILD
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v2
+        
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.301
+          
+      - name: Configure App Settings
+        uses: cschleiden/replace-tokens@v1
+        with: 
+        files: '["Tailspin.SpaceGame.Web/appsettings.json"]'
+        env:
+        LEADER_BOARD_FUNCTION_URL: https://leaderboardsgh.azurewebsites.net/api/Leaderboard
+          
+      - name: Restore dependencies
+        run: dotnet restore
+        working-directory: ./Tailspin.SpaceGame.Web
+        
+      - name: Build
+        run: dotnet build --no-restore
+        working-directory: ./Tailspin.SpaceGame.Web
+        
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
+        working-directory: ./Tailspin.SpaceGame.Web
+      
+      - name: Publish
+        run: dotnet publish --no-restore -c Release
+        working-directory: ./Tailspin.SpaceGame.Web
+      
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2.2.1
+        with:
+          name: drop
+          path: ./Tailspin.SpaceGame.Web/bin/Release/netcoreapp3.1/publish/
+
+
+      api_app_deploy:
+        name: DEPLOY API APP
+        runs-on: ubuntu-latest
+        environment: 
+          name: API App
+          url: https://${{env.API_APP_NAME}}.azurewebsites.net/api/Leaderboard
+        needs:
+        - build_api_app
+        steps:
+          
+        - name: Download a Build Artifact
+          uses: actions/download-artifact@v2.0.7
+          with:
+            name: drop
+            
+        - name: Azure Login
+          uses: Azure/login@v1.1
+          with:
+            creds: ${{ secrets.AZURE_CREDS }}
+            
+        - name: Azure WebApp
+          uses: Azure/webapps-deploy@v2
+          with:
+            app-name: ${{env.API_APP_NAME}}
+            package: .
+
+
+    web_app_deploy:
+      name: DEPLOY FRONT END
       runs-on: ubuntu-latest
       environment: 
-        name: API App
-        url: https://${{env.API_APP_NAME}}.azurewebsites.net/api/Leaderboard
+        name: Web App
+        url: https://${{env.WEB_APP_NAME}}.azurewebsites.net/
       needs:
-      - build_api_app
+      - build_web_app
       steps:
         
       - name: Download a Build Artifact
@@ -64,5 +134,5 @@ jobs:
       - name: Azure WebApp
         uses: Azure/webapps-deploy@v2
         with:
-          app-name: ${{env.API_APP_NAME}}
-          package: .
+          app-name: ${{env.WEB_APP_NAME}}
+          package: . 
