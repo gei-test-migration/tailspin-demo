@@ -1,4 +1,4 @@
-name: Tailspin Leaderboard CI/CD
+name: Tailspin Leaderboard Kubernetes (Disabled)
 
 on:
   push:
