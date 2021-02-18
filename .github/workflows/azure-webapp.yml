@@ -1,0 +1,68 @@
+name: WEB APP DEPLOY
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+env:
+  API_APP_NAME: 'leaderboardsgh'
+
+jobs:
+    build_api_app:
+      name: BUILD API APP
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v2
+        
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.301
+          
+      - name: Restore dependencies
+        run: dotnet restore
+        working-directory: ./Tailspin.SpaceGame.LeaderboardContainer
+        
+      - name: Build
+        run: dotnet build --no-restore
+        working-directory: ./Tailspin.SpaceGame.LeaderboardContainer
+        
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
+        working-directory: ./Tailspin.SpaceGame.LeaderboardContainer
+      
+      - name: Publish
+        run: dotnet publish --no-restore -c Release
+        working-directory: ./Tailspin.SpaceGame.LeaderboardContainer
+      
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2.2.1
+        with:
+          name: drop
+          path: ./Tailspin.SpaceGame.LeaderboardContainer/bin/Release/netcoreapp3.1/publish/
+    
+    api_app_deploy:
+      name: DEPLOY API APP
+      runs-on: ubuntu-latest
+      environment: 
+        name: API App
+        url: https://${{env.API_APP_NAME}}.azurewebsites.net/api/Leaderboard
+      needs:
+      - build_api_app
+      steps:
+        
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v2.0.7
+        with:
+          name: drop
+          
+      - name: Azure Login
+        uses: Azure/login@v1.1
+        with:
+          creds: ${{ secrets.AZURE_CREDS }}
+          
+      - name: Azure WebApp
+        uses: Azure/webapps-deploy@v2
+        with:
+          app-name: ${{env.API_APP_NAME}}
+          package: .

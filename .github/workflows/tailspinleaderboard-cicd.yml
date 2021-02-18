@@ -2,8 +2,8 @@ name: Tailspin Leaderboard CI/CD
 
 on:
   push:
-    branches: 
-      - master
+    branches-ignore: 
+      - '**'
     paths:
       - .github/workflows/tailspinleaderboard-cicd.yml
       - Tailspin.SpaceGame.LeaderboardContainer/**
