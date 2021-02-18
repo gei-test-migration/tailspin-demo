@@ -57,9 +57,9 @@ jobs:
       - name: Configure App Settings
         uses: cschleiden/replace-tokens@v1
         with: 
-        files: '["Tailspin.SpaceGame.Web/appsettings.json"]'
+          files: '["Tailspin.SpaceGame.Web/appsettings.json"]'
         env:
-        LEADER_BOARD_FUNCTION_URL: https://leaderboardsgh.azurewebsites.net/api/Leaderboard
+          LEADERBOARD_API_URL: https://${{env.API_APP_NAME}}.azurewebsites.net/api/Leaderboard             
           
       - name: Restore dependencies
         run: dotnet restore
