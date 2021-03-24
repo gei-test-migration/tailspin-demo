@@ -10,6 +10,7 @@ on:
 jobs:
   testwebapp:
     name: "Run Tests - WebApp"
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
         
@@ -32,6 +33,7 @@ jobs:
   
   testapiapp:
     name: "Run Tests - API"
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
 
