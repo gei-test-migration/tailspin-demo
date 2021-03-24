@@ -1,6 +1,6 @@
 name: TESTS
 on:
-  pull-request:
+  pull_request:
     branches: [trunk]
   workflow_dispatch:
 
