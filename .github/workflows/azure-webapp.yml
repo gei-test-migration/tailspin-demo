@@ -1,7 +1,7 @@
 name: WEB APP DEPLOY
 on:
   push:
-    branches: [master]
+    branches: [trunk]
   workflow_dispatch:
 
 env:
@@ -27,11 +27,7 @@ jobs:
       - name: Build
         run: dotnet build --no-restore
         working-directory: ./Tailspin.SpaceGame.LeaderboardContainer
-        
-      - name: Test
-        run: dotnet test --no-build --verbosity normal
-        working-directory: ./Tailspin.SpaceGame.LeaderboardContainer
-      
+             
       - name: Publish
         run: dotnet publish --no-restore -c Release
         working-directory: ./Tailspin.SpaceGame.LeaderboardContainer
@@ -44,7 +40,7 @@ jobs:
 
 
     build_web_app:
-      name: DOTNET BUILD
+      name: BUILD WEB APP
       runs-on: ubuntu-latest
       steps:
       - uses: actions/checkout@v2
@@ -67,10 +63,6 @@ jobs:
         
       - name: Build
         run: dotnet build --no-restore
-        working-directory: ./Tailspin.SpaceGame.Web
-        
-      - name: Test
-        run: dotnet test --no-build --verbosity normal
         working-directory: ./Tailspin.SpaceGame.Web
       
       - name: Publish
