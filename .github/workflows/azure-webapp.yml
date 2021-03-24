@@ -2,6 +2,8 @@ name: WEB APP DEPLOY
 on:
   push:
     branches: [trunk]
+    paths-ignore:
+    - .github/**
   workflow_dispatch:
 
 env:
