@@ -1,4 +1,4 @@
-name: Spacegame-Docker
+name: Spacegame.Docker
 
 on:
   release:
