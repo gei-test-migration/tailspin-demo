@@ -1,4 +1,4 @@
-name: WEB APP DEPLOY
+name: Spacegame-Web
 on:
   push:
     branches: [trunk]
@@ -12,7 +12,7 @@ env:
 
 jobs:
     build_api_app:
-      name: BUILD API APP
+      name: Build API App
       runs-on: ubuntu-latest
       steps:
       - uses: actions/checkout@v2
@@ -40,9 +40,8 @@ jobs:
           name: spacegameleaderboard
           path: ./Tailspin.SpaceGame.LeaderboardContainer/bin/Release/netcoreapp3.1/publish/
 
-
     build_web_app:
-      name: BUILD WEB APP
+      name: Build Web App
       runs-on: ubuntu-latest
       steps:
       - uses: actions/checkout@v2
@@ -77,9 +76,8 @@ jobs:
           name: spacegameweb
           path: ./Tailspin.SpaceGame.Web/bin/Release/netcoreapp3.1/publish/
 
-
     api_app_deploy:
-      name: DEPLOY API APP
+      name: Deploy API APP
       runs-on: ubuntu-latest
       environment: 
         name: API App
@@ -104,9 +102,8 @@ jobs:
           app-name: ${{env.API_APP_NAME}}
           package: .
 
-
     web_app_deploy:
-      name: DEPLOY FRONT END
+      name: Deploy FrontEnd
       runs-on: ubuntu-latest
       environment: 
         name: Web App
