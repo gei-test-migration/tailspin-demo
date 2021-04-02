@@ -1,4 +1,4 @@
-name: GITHUB CONTAINER REGISTRY
+name: Spacegame-Docker
 
 on:
   release:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   leaderboardpush:
-    name: LEADERBORD DOCKER PUSH
+    name: Leaderboard Docker Push
     runs-on: ubuntu-latest    
     steps:
       
@@ -44,7 +44,6 @@ jobs:
        
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
-  
 
   # spacegamepush:
   #   name: SPACE GAME DOCKER PUSH
