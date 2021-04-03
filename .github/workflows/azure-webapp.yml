@@ -168,7 +168,7 @@ jobs:
       environment: 
         name: API App
         url: https://${{env.API_APP_NAME}}.azurewebsites.net/api/Leaderboard
-      needs: [build_api_app, code-analysis, code-ql]
+      needs: [build_api_app, code-ql]
       steps:
         
       - name: Download a Build Artifact
@@ -193,7 +193,7 @@ jobs:
       environment: 
         name: Web App
         url: https://${{env.WEB_APP_NAME}}.azurewebsites.net/
-      needs: [build_web_app, code-analysis, code-ql]
+      needs: [build_web_app, code-ql]
       
       steps:  
       - name: Download a Build Artifact
