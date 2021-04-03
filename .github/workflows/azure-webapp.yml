@@ -76,7 +76,55 @@ jobs:
         with:
           name: spacegameweb
           path: ./Tailspin.SpaceGame.Web/bin/Release/netcoreapp3.1/publish/
+      
+    test_api_app:
+      name: Unit Tests API
+      runs-on: ubuntu-latest
+      needs: [build_api_app]
+      steps:
+      - uses: actions/checkout@v2
+        
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.301
+          
+      - name: Restore dependencies
+        run: dotnet restore
+        working-directory: ./Tailspin.SpaceGame.LeaderboardContainer
+        
+      - name: Build
+        run: dotnet build --no-restore
+        working-directory: ./Tailspin.SpaceGame.LeaderboardContainer
+
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
+        working-directory: ./Tailspin.SpaceGame.LeaderboardContainer
     
+    test_web_app:
+      name: Unit Tests Web
+      runs-on: ubuntu-latest
+      needs: [build_web_app ]
+      steps:
+      - uses: actions/checkout@v2
+        
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.301           
+          
+      - name: Restore dependencies
+        run: dotnet restore
+        working-directory: ./Tailspin.SpaceGame.Web
+        
+      - name: Build
+        run: dotnet build --no-restore
+        working-directory: ./Tailspin.SpaceGame.Web
+      
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
+        working-directory: ./Tailspin.SpaceGame.Web
+        
     code-analysis:
       name: 🔆 Code Analysis
       runs-on: ubuntu-latest
