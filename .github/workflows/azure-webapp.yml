@@ -125,22 +125,22 @@ jobs:
         run: dotnet test --no-build --verbosity normal
         working-directory: ./Tailspin.SpaceGame.Web
         
-    code-analysis:
-      name: 🔆 Code Analysis
-      runs-on: ubuntu-latest
-      needs: [test_api_app, test_web_app]
-      steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          # Make sure the actual branch is checked out when running on pull requests
-          ref: ${{ github.head_ref }}
-    
-      - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@v1.5
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    #code-analysis:
+    #  name: 🔆 Code Analysis
+    #  runs-on: ubuntu-latest
+    #  needs: [test_api_app, test_web_app]
+    #  steps:
+    #  - name: Checkout
+    #    uses: actions/checkout@v2
+    #    with:
+    #      # Make sure the actual branch is checked out when running on pull requests
+    #      ref: ${{ github.head_ref }}
+    #
+    #  - name: SonarCloud Scan
+    #    uses: sonarsource/sonarcloud-github-action@v1.5
+    #    env:
+    #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     
     code-ql:
       name: ⭕️ Security Scanning
