@@ -1,4 +1,4 @@
-name: manage-azure-policy-a6c4c747
+name: Run-Azure-Policy
 on:
   workflow_dispatch:
     inputs:
