@@ -87,7 +87,7 @@ jobs:
         container-registry-url: ghcr.io
         container-registry-username: ${{env.REPO_OWNER}}
         container-registry-password: ${{ secrets.CR_PAT }}
-        secret-name: canarysplayground-aks-connection
+        secret-name: aks-connection
         
     - name: Deploy to Kubernetes cluster
       uses: Azure/k8s-deploy@v1
@@ -95,7 +95,7 @@ jobs:
         manifests: manifests/apideployments.yml      
         images: ghcr.io/${{env.REPO_OWNER}}/spacegameleaderboard:${{ steps.date.outputs.date }}.${{ github.run_number }}
         imagepullsecrets: |
-          canarysplayground-aks-connection
+          aks-connection
         force: true
   
   # --------------------------------------------------------------------------------------------------------------
