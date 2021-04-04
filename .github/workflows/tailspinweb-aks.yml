@@ -1,9 +1,8 @@
-name: Tailspin Web Kubernetes (Disabled)
+name: Tailspin Web Kubernetes
 
 on:
-  push:
-    branches-ignore: 
-      - '**'
+  push: 
+    branches:  [trunk]
     paths:
       - .github/workflows/tailspinweb-cicd.yml
       - Tailspin.SpaceGame.Web/**
@@ -51,8 +50,8 @@ jobs:
           file: ./Tailspin.SpaceGame.Web/Dockerfile
           push: true
           tags: |
-            ghcr.io/grenston/spacegameweb:latest
-            ghcr.io/grenston/spacegameweb:${{ steps.date.outputs.date }}.${{ github.run_number }}
+            ghcr.io/canarysplayground/spacegameweb:latest
+            ghcr.io/canarysplayground/spacegameweb:${{ steps.date.outputs.date }}.${{ github.run_number }}
           
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
@@ -76,13 +75,13 @@ jobs:
     - name: Azure Login
       uses: Azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDS }}
+        creds: ${{ secrets.AKS_CREDS }}
   
     - name: Azure Kubernetes set context
       uses: Azure/aks-set-context@v1
       with:
         creds: ${{ secrets.AZURE_CREDS }}
-        resource-group: Tailspin-Grenston
+        resource-group: aks-test
         cluster-name: tailspin-space
     
     - uses: azure/k8s-create-secret@v1
@@ -91,15 +90,15 @@ jobs:
         container-registry-url: ghcr.io
         container-registry-username: ${{ github.repository_owner }}
         container-registry-password: ${{ secrets.CR_PAT }}
-        secret-name: grenston-registry-connection
+        secret-name: aks-connection
         
     - name: Deploy to Kubernetes cluster
       uses: Azure/k8s-deploy@v1
       with:       
         manifests: manifests/webdeployments.yml      
-        images: ghcr.io/grenston/spacegameweb:${{ steps.date.outputs.date }}.${{ github.run_number }}
+        images: ghcr.io/canarysplayground/spacegameweb:${{ steps.date.outputs.date }}.${{ github.run_number }}
         imagepullsecrets: |
-          grenston-registry-connection
+          aks-connection
         force: true
    
   # build:
