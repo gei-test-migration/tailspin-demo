@@ -93,7 +93,7 @@ jobs:
       uses: Azure/k8s-deploy@v1
       with:       
         manifests: manifests/apideployments.yml      
-        images: ghcr.io/${{env.REPO_OWNER}}/spacegameleaderboard:${{ steps.date.outputs.date }}.${{ github.run_number }}
+        images: ghcr.io/canarysplayground/spacegameleaderboard:${{ steps.date.outputs.date }}.${{ github.run_number }}
         imagepullsecrets: |
           aks-connection
         force: true
