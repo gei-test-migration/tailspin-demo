@@ -2,7 +2,8 @@ name: Tailspin Web Kubernetes
 
 on:
   push: 
-    branches:  [trunk]
+    branches: 
+      - trunk
     paths:
       - .github/workflows/tailspinweb-cicd.yml
       - Tailspin.SpaceGame.Web/**
@@ -80,7 +81,7 @@ jobs:
     - name: Azure Kubernetes set context
       uses: Azure/aks-set-context@v1
       with:
-        creds: ${{ secrets.AZURE_CREDS }}
+        creds: ${{ secrets.AKS_CREDS }}
         resource-group: aks-test
         cluster-name: tailspin-space
     
