@@ -41,7 +41,7 @@ jobs:
         with: 
          files: '["Tailspin.SpaceGame.Web/appsettings.json"]'
         env:
-         LEADERBOARD_API_URL: http://${{secrets.LEADERBOARD_CLUSTER_IP}}/api/Leaderboard
+         LEADERBOARD_API_URL: ${{secrets.LEADERBOARD_CLUSTER_IP}}
 
       - name: Build and push
         id: docker_build
@@ -86,7 +86,7 @@ jobs:
         cluster-name: tailspin-space
     
     - uses: azure/k8s-create-secret@v1
-      name: Create imagepullsecret for ACR
+      name: Create imagepullsecret for GCR
       with:
         container-registry-url: ghcr.io
         container-registry-username: ${{ github.repository_owner }}
