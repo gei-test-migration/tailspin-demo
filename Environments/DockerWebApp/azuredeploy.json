@@ -102,6 +102,10 @@
                         {
                             "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
                             "value": "false"
+                        },
+                        {
+                            "name": "AppSettings__LeaderboardFunctionUrl",
+                            "value": "[reference(resourceId('Microsoft.Web/sites', variables('apiappName')), '2018-11-01').defaultHostName]"
                         }
                     ],
                     "linuxFxVersion": "DOCKER|tailspin.azurecr.io/spacegameweb:latest",
