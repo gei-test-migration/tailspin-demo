@@ -1,11 +1,11 @@
-name: Spacegame.DevTestLabs
+name: Spacegame.ACR
 
 on:
   workflow_dispatch:
 
 jobs:
   leaderboardpush:
-    name: Leaderboard ACR Push
+    name: Docker Push ACR - API
     runs-on: ubuntu-latest    
     steps:
       
@@ -44,7 +44,7 @@ jobs:
         run: echo ${{ steps.docker_build.outputs.digest }}
 
   spacegamepush:
-    name: SPACE GAME ACR PUSH
+    name: Docker Push ACR - Web
     runs-on: ubuntu-latest
     steps:
       
