@@ -72,11 +72,11 @@
     "outputs": {
         "webappName": {
           "type": "string",
-          "value": "[variables('webAppName')]"
+          "value": "[variables('webappName')]"
         },
         "apiappName": {
             "type": "string",
-            "value": "[variables('apiAppName')]"
+            "value": "[variables('apiappName')]"
         }
       }
 }
