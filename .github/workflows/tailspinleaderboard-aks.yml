@@ -1,4 +1,4 @@
-name: Tailspin Leaderboard Kubernetes
+name: Tailspin-Leaderboard.k8s
 
 env: 
   REPO_OWNER: canarysplayground
@@ -17,7 +17,7 @@ on:
   
 jobs:
   dockerpush:
-    name: DOCKER BUILD & PUSH
+    name: Docker Build and Push
     runs-on: ubuntu-latest    
     steps:
       
