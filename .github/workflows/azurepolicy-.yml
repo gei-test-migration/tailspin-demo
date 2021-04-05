@@ -1,3 +1,4 @@
+name: Compliance-Check
 on: push
 
 jobs:
