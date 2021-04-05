@@ -1,4 +1,4 @@
-name: Tailspin Web Kubernetes
+name: Tailspin-Web.k8s
 
 on:
   push: 
@@ -12,7 +12,7 @@ on:
   
 jobs:
   dockerpush:
-    name: DOCKER BUILD & PUSH
+    name: Docker Build and Push
     runs-on: ubuntu-latest
     steps:
       
@@ -58,7 +58,7 @@ jobs:
         run: echo ${{ steps.docker_build.outputs.digest }}
   
   AKS_deploy:
-    name: AKS DEPLOY
+    name: Deploy to AKS
     environment: 
       name: AKS Cluster
       url: http://52.188.25.119/
