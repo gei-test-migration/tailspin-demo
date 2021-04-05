@@ -1,0 +1,77 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "Tailpin ACR Username": {
+            "type": "string"
+        },
+        "Tailspin ACR Password": {
+            "type": "securestring"
+        }
+    },
+    "variables": {
+        "resourceNamePrefix": "[take(uniqueString(resourceGroup().id), 3)]",
+        "hostingPlanName": "[toLower(concat(variables('resourceNamePrefix'), '-', take(uniqueString(resourceGroup().id), 6), '-sp'))]",
+        "siteName": "[toLower(concat(variables('resourceNamePrefix'), '-', take(uniqueString(resourceGroup().id), 6)))]"
+    },
+    "resources": [
+        {
+            "apiVersion": "2018-11-01",
+            "name": "[variables('hostingPlanName')]",
+            "type": "Microsoft.Web/serverfarms",
+            "location": "[resourceGroup().location]",
+            "kind": "linux",
+            "tags": {},
+            "dependsOn": [],
+            "properties": {
+                "name": "[variables('hostingPlanName')]",
+                "workerSize": "0",
+                "workerSizeId": "0",
+                "numberOfWorkers": "1",
+                "reserved": true
+            },
+            "sku": {
+                "Tier": "Basic",
+                "Name": "B1"
+            }
+        },
+        {
+            "apiVersion": "2018-11-01",
+            "name": "[variables('siteName')]",
+            "type": "Microsoft.Web/sites",
+            "location": "[resourceGroup().location]",
+            "tags": {},
+            "dependsOn": [
+                "[concat('Microsoft.Web/serverfarms/', variables('hostingPlanName'))]"
+            ],
+            "properties": {
+                "name": "[variables('siteName')]",
+                "siteConfig": {
+                    "appSettings": [
+                        {
+                            "name": "DOCKER_REGISTRY_SERVER_URL",
+                            "value": "https://tailspin.azurecr.io"
+                        },
+                        {
+                            "name": "DOCKER_REGISTRY_SERVER_USERNAME",
+                            "value": "[parameters('Tailpin ACR Username')]"
+                        },
+                        {
+                            "name": "DOCKER_REGISTRY_SERVER_PASSWORD",
+                            "value": "[parameters('Tailspin ACR Password')]"
+                        },
+                        {
+                            "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
+                            "value": "false"
+                        }
+                    ],
+                    "linuxFxVersion": "DOCKER|tailspin.azurecr.io/tailspin:latest",
+                    "appCommandLine": "",
+                    "alwaysOn": false
+                },
+                "serverFarmId": "[variables('hostingPlanName')]",
+                "clientAffinityEnabled": false
+            }
+        }
+    ]
+}
