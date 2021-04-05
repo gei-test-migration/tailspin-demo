@@ -72,7 +72,7 @@ jobs:
       - name: Anchor Scan Web image
         uses: anchore/scan-action@main
         with:
-          image: "ghcr.io/${{env.REPO_OWNER}}/spacegameleaderboard:latest"
+          image: "ghcr.io/canarysplayground/spacegameweb:latest"
           acs-report-enable: true
           fail-build: true
           severity-cutoff: critical
