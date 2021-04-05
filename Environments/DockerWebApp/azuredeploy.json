@@ -11,7 +11,7 @@
     },
     "variables": {
         "webappNamePrefix": "[take(uniqueString(resourceGroup().id), 3)]",
-        "apiappNamePrefix": "[take(uniqueString(resourceGroup().id), 3)]",
+        "apiappNamePrefix": "[take(uniqueString(resourceGroup().id), 4)]",
         "hostingPlanName": "[toLower(concat(variables('webappNamePrefix'), '-', take(uniqueString(resourceGroup().id), 6), '-sp'))]",
         "webappName": "[toLower(concat(variables('webappNamePrefix'), '-', take(uniqueString(resourceGroup().id), 6)))]",
         "apiappName": "[toLower(concat(variables('apiappNamePrefix'), '-', take(uniqueString(resourceGroup().id), 6)))]"
