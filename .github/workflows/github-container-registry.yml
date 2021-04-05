@@ -7,7 +7,7 @@ on:
 
 jobs:
   leaderboardpush:
-    name: Leaderboard Docker Push
+    name: Docker Push GCR
     runs-on: ubuntu-latest    
     steps:
       
