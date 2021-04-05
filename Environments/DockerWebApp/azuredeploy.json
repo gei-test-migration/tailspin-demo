@@ -111,17 +111,6 @@
                 "serverFarmId": "[variables('hostingPlanName')]",
                 "clientAffinityEnabled": false
             }
-        },
-        {
-            "apiVersion": "2018-11-01",
-            "name": "webappsettings",
-            "type": "Microsoft.Web/sites/config",
-            "dependsOn": [
-                "[concat('Microsoft.Web/sites/', variables('webappName'))]"
-            ],
-            "properties": {
-                "LeaderboardFunctionUrl": "[reference(resourceId('Microsoft.Web/sites', variables('apiappName')), '2018-11-01').defaultHostName]"
-            }
         }
     ]
 }
