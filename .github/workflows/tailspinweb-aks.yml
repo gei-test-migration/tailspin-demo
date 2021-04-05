@@ -5,7 +5,7 @@ on:
     branches: 
       - trunk
     paths:
-      - .github/workflows/tailspinweb-cicd.yml
+      - .github/workflows/tailspinweb-aks.yml
       - Tailspin.SpaceGame.Web/**
       - manifests/webdeployments.yml
   workflow_dispatch:
@@ -41,7 +41,7 @@ jobs:
         with: 
          files: '["Tailspin.SpaceGame.Web/appsettings.json"]'
         env:
-         LEADERBOARD_API_URL: ${{secrets.API_CLUSTER_IP}}
+         LEADERBOARD_API_URL: http://10.0.199.135/api/Leaderboard
 
       - name: Build and push
         id: docker_build
@@ -61,7 +61,7 @@ jobs:
     name: Deploy to AKS
     environment: 
       name: AKS Cluster
-      url: http://52.188.25.119/
+      url: http://20.195.63.240/
     runs-on: ubuntu-latest
     needs: dockerpush
     steps:
