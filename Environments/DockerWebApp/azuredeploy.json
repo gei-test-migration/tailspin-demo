@@ -12,7 +12,8 @@
     "variables": {
         "resourceNamePrefix": "[take(uniqueString(resourceGroup().id), 3)]",
         "hostingPlanName": "[toLower(concat(variables('resourceNamePrefix'), '-', take(uniqueString(resourceGroup().id), 6), '-sp'))]",
-        "siteName": "[toLower(concat(variables('resourceNamePrefix'), '-', take(uniqueString(resourceGroup().id), 6)))]"
+        "webappName": "[toLower(concat(variables('resourceNamePrefix'), '-', take(uniqueString(resourceGroup().id), 6)))]",
+        "apiappName": "[toLower(concat(variables('resourceNamePrefix'), '-', take(uniqueString(resourceGroup().id), 6)))]"
     },
     "resources": [
         {
@@ -37,7 +38,7 @@
         },
         {
             "apiVersion": "2018-11-01",
-            "name": "[variables('siteName')]",
+            "name": "[variables('apiappName')]",
             "type": "Microsoft.Web/sites",
             "location": "[resourceGroup().location]",
             "tags": {},
@@ -45,7 +46,7 @@
                 "[concat('Microsoft.Web/serverfarms/', variables('hostingPlanName'))]"
             ],
             "properties": {
-                "name": "[variables('siteName')]",
+                "name": "[variables('apiappName')]",
                 "siteConfig": {
                     "appSettings": [
                         {
@@ -65,12 +66,81 @@
                             "value": "false"
                         }
                     ],
-                    "linuxFxVersion": "DOCKER|tailspin.azurecr.io/tailspin:latest",
+                    "linuxFxVersion": "DOCKER|tailspin.azurecr.io/leaderboard:latest",
                     "appCommandLine": "",
                     "alwaysOn": false
                 },
                 "serverFarmId": "[variables('hostingPlanName')]",
                 "clientAffinityEnabled": false
+            }
+        },
+        {
+            "apiVersion": "2018-11-01",
+            "name": "[variables('hostingPlanName')]",
+            "type": "Microsoft.Web/serverfarms",
+            "location": "[resourceGroup().location]",
+            "kind": "linux",
+            "tags": {},
+            "dependsOn": [],
+            "properties": {
+                "name": "[variables('hostingPlanName')]",
+                "workerSize": "0",
+                "workerSizeId": "0",
+                "numberOfWorkers": "1",
+                "reserved": true
+            },
+            "sku": {
+                "Tier": "Basic",
+                "Name": "B1"
+            }
+        },
+        {
+            "apiVersion": "2018-11-01",
+            "name": "[variables('webappName')]",
+            "type": "Microsoft.Web/sites",
+            "location": "[resourceGroup().location]",
+            "tags": {},
+            "dependsOn": [
+                "[concat('Microsoft.Web/serverfarms/', variables('hostingPlanName'))]"
+            ],
+            "properties": {
+                "name": "[variables('webappName')]",
+                "siteConfig": {
+                    "appSettings": [
+                        {
+                            "name": "DOCKER_REGISTRY_SERVER_URL",
+                            "value": "https://tailspin.azurecr.io"
+                        },
+                        {
+                            "name": "DOCKER_REGISTRY_SERVER_USERNAME",
+                            "value": "[parameters('Tailpin ACR Username')]"
+                        },
+                        {
+                            "name": "DOCKER_REGISTRY_SERVER_PASSWORD",
+                            "value": "[parameters('Tailspin ACR Password')]"
+                        },
+                        {
+                            "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
+                            "value": "false"
+                        }
+                    ],
+                    "linuxFxVersion": "DOCKER|tailspin.azurecr.io/spacegameweb:latest",
+                    "appCommandLine": "",
+                    "alwaysOn": false
+                },
+                "serverFarmId": "[variables('hostingPlanName')]",
+                "clientAffinityEnabled": false
+            }
+        },
+        {
+            "apiVersion": "2018-11-01",
+            "name": "webappsettings",
+            "type": "Microsoft.Web/sites/config",
+            "dependsOn": [
+                "[concat('Microsoft.Web/sites/', variables('webappName'))]"
+            ],
+            "properties": {
+                "LeaderboardFunctionUrl": "[reference(resourceId('Microsoft.Web/sites', variables('apiappName')), '2018-11-01').defaultHostName]"
             }
         }
     ]
