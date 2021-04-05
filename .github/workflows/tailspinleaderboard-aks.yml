@@ -51,15 +51,14 @@ jobs:
           tags: |
             ghcr.io/${{env.REPO_OWNER}}/spacegameleaderboard:latest
             ghcr.io/${{env.REPO_OWNER}}/spacegameleaderboard:${{ steps.date.outputs.date }}.${{ github.run_number }}
-       
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
       
       - name: Anchor Scan Web image
         uses: anchore/scan-action@main
         with:
           image: "ghcr.io/${{env.REPO_OWNER}}/spacegameleaderboard:latest"
           acs-report-enable: true
+          fail-build: true
+          severity-cutoff: critical
          
       - name: Upload Anchore Scan Report
         if: always()
