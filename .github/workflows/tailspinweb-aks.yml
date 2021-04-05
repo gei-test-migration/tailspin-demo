@@ -41,7 +41,7 @@ jobs:
         with: 
          files: '["Tailspin.SpaceGame.Web/appsettings.json"]'
         env:
-         LEADERBOARD_API_URL: http://10.0.199.135/api/Leaderboard
+         LEADERBOARD_API_URL: http://${{secrets.LEADERBOARD_CLUSTER_IP}}/api/Leaderboard
 
       - name: Build and push
         id: docker_build
