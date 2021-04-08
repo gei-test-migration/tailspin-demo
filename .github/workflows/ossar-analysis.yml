@@ -4,11 +4,10 @@
 name: OSSAR
 
 on:
-  push:
-    branches: [ trunk ]
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ trunk ]
+  workflow_dispatch:
   schedule:
     - cron: '29 9 * * 6'
 
