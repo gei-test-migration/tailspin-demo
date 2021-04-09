@@ -38,10 +38,11 @@
                 "[concat('Microsoft.Web/serverfarms/', variables('hostingPlanName'))]"
             ],
             "properties": {
-                "name": "[variables('apiappName')]",          
-                "linuxFxVersion": "DOTNETCORE|3.1",
-                "appCommandLine": "",
-                "alwaysOn": false
+                "name": "[variables('apiappName')]",
+                "siteConfig": {
+                    "linuxFxVersion": "DOTNETCORE|3.1",
+                    "appCommandLine": "",
+                    "alwaysOn": false
                 },
                 "serverFarmId": "[variables('hostingPlanName')]",
                 "clientAffinityEnabled": false
@@ -58,9 +59,10 @@
             ],
             "properties": {
                 "name": "[variables('webappName')]",
-                "linuxFxVersion": "DOTNETCORE|3.1",
-                "appCommandLine": "",
-                "alwaysOn": false
+                "siteConfig": {
+                    "linuxFxVersion": "DOTNETCORE|3.1",
+                    "appCommandLine": "",
+                    "alwaysOn": false
                 },
                 "serverFarmId": "[variables('hostingPlanName')]",
                 "clientAffinityEnabled": false
