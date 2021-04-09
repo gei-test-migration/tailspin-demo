@@ -89,16 +89,23 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZ_ARM_CREDS }}
-        
+    
+    - name: Key vault - Get RG Name
+      uses: Azure/get-keyvault-secrets@v1.2
+      id: get_rgName
+      with:
+        keyvault: "tailspinappsetings"
+        secrets: 'resourceGroup'
+           
     - name: Create resources
       uses: azure/arm-deploy@v1
+      id: arm_deploy
       with:
-        resourceGroupName: tailspin-arm
+        resourceGroupName: ${{steps.get_rgName.outputs.resourceGroup}}
         template: Deployments/arm-templates/azuredeploy.json
         parameters: Deployments/arm-templates/azuredeploy.parameters.json
         deploymentMode: Complete
-      id: arm_deploy
-      
+           
     - name: Api Deploy
       uses: Azure/webapps-deploy@v2
       with:
