@@ -101,5 +101,5 @@ jobs:
     - name: Web Deploy
       uses: Azure/webapps-deploy@v2
       with:
-        app-name: ${{steps.arm_deploy.outputs.apiappname}}
+        app-name: ${{steps.arm_deploy.outputs.webappname}}
         package: webapp
