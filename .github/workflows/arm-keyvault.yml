@@ -95,6 +95,7 @@ jobs:
       with:
         resourceGroupName: tailspin-arm
         template: Deployments/arm-templates/azuredeploy.json
+        parameters: Deployments/arm-templates/azuredeploy.parameters.json
         deploymentMode: Complete
       id: arm_deploy
       
