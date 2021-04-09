@@ -60,6 +60,12 @@
             "properties": {
                 "name": "[variables('webappName')]",
                 "siteConfig": {
+                    "appSettings": [
+                        {
+                            "name": "AppSettings__LeaderboardFunctionUrl",
+                            "value": "[concat('https://',reference(resourceId('Microsoft.Web/sites', variables('apiappName')), '2018-11-01').defaultHostName,'/api/Leaderboard')]"
+                        }
+                     ]
                     "linuxFxVersion": "DOTNETCORE|3.1",
                     "appCommandLine": "",
                     "alwaysOn": false
