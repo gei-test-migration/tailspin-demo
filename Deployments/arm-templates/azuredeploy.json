@@ -70,12 +70,13 @@
         }
     ],
     "outputs": {
-      "apiappname": {
-          "type": "string",
-          "value": "[variables('apiappName']"
-      },
-      "webappname": {
-        "type": "string",
-        "value": "[variables('webappName']"      
+        "apiappname": {
+             "type": "string",
+             "value": "[variables('apiappName']"
+        },
+        "webappname": {
+            "type": "string",
+            "value": "[variables('webappName']"
+        }
     }
 }
