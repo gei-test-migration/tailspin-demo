@@ -1,7 +1,7 @@
 name: AzureARM-CICD
 on:
   push:
-    branches: [arm-keyvault]
+    branches: [trunk]
 
 jobs:
   build_api_app:
