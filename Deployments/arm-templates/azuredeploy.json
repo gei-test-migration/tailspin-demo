@@ -1,6 +1,17 @@
 {
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
+    "parameters": {
+        "linuxFxVersion": {
+            "type": "string"
+        },
+        "skuName": {
+            "type": "string"
+        },
+        "skuTier": {
+            "type": "string"
+        }
+    }
     "variables": {
         "resourceNamePrefix": "[take(uniqueString(resourceGroup().id), 3)]",
         "hostingPlanName": "[toLower(concat(variables('resourceNamePrefix'), '-', take(uniqueString(resourceGroup().id), 6), '-sp'))]",
@@ -24,8 +35,8 @@
                 "reserved": true
             },
             "sku": {
-                "Tier": "Basic",
-                "Name": "B1"
+                "Tier": "[parameters('skuTier')]",
+                "Name": "[parameters('skuName')]"
             }
         },
         {
@@ -40,7 +51,7 @@
             "properties": {
                 "name": "[variables('apiappName')]",
                 "siteConfig": {
-                    "linuxFxVersion": "DOTNETCORE|3.1",
+                    "linuxFxVersion": "[parameters('linuxFxVersion')]",
                     "appCommandLine": "",
                     "alwaysOn": false
                 },
@@ -66,7 +77,7 @@
                             "value": "[concat('https://',reference(resourceId('Microsoft.Web/sites', variables('apiappName')), '2018-11-01').defaultHostName,'/api/Leaderboard')]"
                         }
                      ],
-                    "linuxFxVersion": "DOTNETCORE|3.1",
+                    "linuxFxVersion": "[parameters('linuxFxVersion')]",
                     "appCommandLine": "",
                     "alwaysOn": false
                 },
