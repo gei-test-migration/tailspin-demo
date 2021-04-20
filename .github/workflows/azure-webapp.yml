@@ -8,7 +8,7 @@ on:
 
 env:
   API_APP_NAME: 'leaderboardgh'
-  WEB_APP_NAME: 'spacegh'
+  WEB_APP_NAME: 'spaceweb'
 
 jobs:
     build_api_app:
