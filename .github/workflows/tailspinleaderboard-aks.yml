@@ -1,4 +1,9 @@
-name: Tailspin Leaderboard Kubernetes (Disabled)
+name: Tailspin-Leaderboard.k8s
+
+env: 
+  REPO_OWNER: canarysplayground
+  RESOURCE_GROUP: aks-test
+  CLUSTER_NAME: tailspin-space
 
 on:
   push:
@@ -12,7 +17,7 @@ on:
   
 jobs:
   dockerpush:
-    name: DOCKER BUILD & PUSH
+    name: 🐋 Docker Build and Push
     runs-on: ubuntu-latest    
     steps:
       
@@ -29,7 +34,7 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
-          username: ${{ github.repository_owner }}
+          username: ${{env.REPO_OWNER}}
           password: ${{ secrets.CR_PAT }}
           
       - name: Get current date
@@ -44,17 +49,40 @@ jobs:
           file: ./Tailspin.SpaceGame.LeaderboardContainer/Dockerfile
           push: true
           tags: |
-            ghcr.io/grenston/spacegameleaderboard:latest
-            ghcr.io/grenston/spacegameleaderboard:${{ steps.date.outputs.date }}.${{ github.run_number }}
-       
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
+            ghcr.io/${{env.REPO_OWNER}}/spacegameleaderboard:latest
+            ghcr.io/${{env.REPO_OWNER}}/spacegameleaderboard:${{ steps.date.outputs.date }}.${{ github.run_number }}
+
+
+  anchore:
+    name: 🔆 Anchore Analysis
+    needs: dockerpush
+    runs-on: ubuntu-latest
+    steps:  
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{env.REPO_OWNER}}
+          password: ${{ secrets.CR_PAT }}
+      - name: Anchor Scan Web image
+        uses: anchore/scan-action@main
+        with:
+          image: "ghcr.io/${{env.REPO_OWNER}}/spacegameleaderboard:latest"
+          acs-report-enable: true
+          fail-build: true
+          severity-cutoff: critical
+         
+      - name: Upload Anchore Scan Report
+        if: always()
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: results.sarif
         
   AKS_deploy:
-    name: AKS DEPLOY
+    name: 🚀 AKS DEPLOY
     environment: AKS Cluster
     runs-on: ubuntu-latest
-    needs: dockerpush
+    needs: anchore
     steps:
     
     - name: Checkout
@@ -67,30 +95,30 @@ jobs:
     - name: Azure Login
       uses: Azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDS }}
+        creds: ${{ secrets.AKS_CREDS }}
   
     - name: Azure Kubernetes set context
       uses: Azure/aks-set-context@v1
       with:
-        creds: ${{ secrets.AZURE_CREDS }}
-        resource-group: Tailspin-Grenston
-        cluster-name: tailspin-space
+        creds: ${{ secrets.AKS_CREDS }}
+        resource-group: ${{env.RESOURCE_GROUP}}
+        cluster-name: ${{env.CLUSTER_NAME}}
     
     - uses: azure/k8s-create-secret@v1
       name: Create imagepullsecret for ACR
       with:
         container-registry-url: ghcr.io
-        container-registry-username: ${{ github.repository_owner }}
+        container-registry-username: ${{env.REPO_OWNER}}
         container-registry-password: ${{ secrets.CR_PAT }}
-        secret-name: grenston-registry-connection
+        secret-name: aks-connection
         
     - name: Deploy to Kubernetes cluster
       uses: Azure/k8s-deploy@v1
       with:       
         manifests: manifests/apideployments.yml      
-        images: ghcr.io/grenston/spacegameleaderboard:${{ steps.date.outputs.date }}.${{ github.run_number }}
+        images: ghcr.io/canarysplayground/spacegameleaderboard:${{ steps.date.outputs.date }}.${{ github.run_number }}
         imagepullsecrets: |
-          grenston-registry-connection
+          aks-connection
         force: true
   
   # --------------------------------------------------------------------------------------------------------------
