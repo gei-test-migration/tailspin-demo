@@ -16,7 +16,7 @@ section {
 
 .intro {
   height: 350px;
-  background-color: #db6a0d;
+  background-color: #ccff99;
   background-image: url("/images/space-background.svg");
   background-size: 1440px;
   background-position: center top;
@@ -46,7 +46,7 @@ section {
   font-weight: bold; }
 
 .screens {
-  background: #db6a0d; }
+  background: #ccff99; }
   .screens ul {
     padding: 0; }
     .screens ul li {
