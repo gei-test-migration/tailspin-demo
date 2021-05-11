@@ -5,4 +5,8 @@ d0827f2752419d4fb9b47a6f298311eabad96340
 automate_branch_rules_cr_pat:
 88a5d8a082ec7bb9de2b4a30fdb46f2ada8c6259
 
-az ad sp create-for-rbac --name "canarystailspin" --sdk-auth --role contributor --scopes /subscriptions/33a54cdd-4719-421e-b20f-582606580277
+Azure DevOps Personal Access Token
+4yjanntbxxcmpxgvx444c5skmsw76n732vm27twvrzpx5rwf6jwq
+
+Azure SQL Connection String
+Server=tcp:mysqldemos.database.windows.net,1433;Initial Catalog=bikesharingprivateweb;Persist Security Info=False;User ID=vatsa;Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
