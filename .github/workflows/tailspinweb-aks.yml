@@ -108,8 +108,8 @@ jobs:
       uses: Azure/aks-set-context@v1
       with:
         creds: ${{ secrets.AKS_CREDS }}
-        resource-group: aks-test
-        cluster-name: tailspin-space
+        resource-group: Canarys
+        cluster-name: playground
     
     - uses: azure/k8s-create-secret@v1
       name: Create imagepullsecret for GCR
