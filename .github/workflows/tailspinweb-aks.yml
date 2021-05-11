@@ -87,7 +87,7 @@ jobs:
     name: 🚀 Deploy to AKS
     environment: 
       name: AKS Cluster
-      url: http://20.195.63.240/
+      url: http://52.191.92.166/
     runs-on: ubuntu-latest
     needs: anchore
     steps:
