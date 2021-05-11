@@ -12,7 +12,7 @@ on:
   
 jobs:
   dockerpush:
-    name: Docker Build and Push
+    name: 🐋 Docker Build and Push
     runs-on: ubuntu-latest
     steps:
       
@@ -58,7 +58,7 @@ jobs:
         run: echo ${{ steps.docker_build.outputs.digest }}
   
   anchore:
-    name: Anchore Analyse
+    name: 🔆 Anchore Analyse
     needs: dockerpush
     runs-on: ubuntu-latest
     steps:  
@@ -84,7 +84,7 @@ jobs:
           sarif_file: results.sarif
           
   AKS_deploy:
-    name: Deploy to AKS
+    name: 🚀 Deploy to AKS
     environment: 
       name: AKS Cluster
       url: http://20.195.63.240/
