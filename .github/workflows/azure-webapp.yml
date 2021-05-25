@@ -1,14 +1,14 @@
 name: Spacegame.Web
 on:
-  push:
-    branches: [trunk]
-    paths-ignore:
-    - .github/**
+# push:
+   #branches: [trunk]
+   #paths-ignore:
+   #- .github/**
   workflow_dispatch:
 
 env:
-  API_APP_NAME: 'leaderboardgh'
-  WEB_APP_NAME: 'spaceweb'
+  API_APP_NAME: 'tailspinleaderboard'
+  WEB_APP_NAME: 'tailspinwebapp'
 
 jobs:
     build_api_app:
