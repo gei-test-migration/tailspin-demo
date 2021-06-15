@@ -110,7 +110,7 @@ jobs:
            region: us-east-2
            application_name: tailspin
            environment_name: Tailspin-env-1
-           version_label: tailspin-2.0
+           version_label: tailspin-3.0
            deployment_package: tailspinpackage.zip
     
 #    validate-web:
