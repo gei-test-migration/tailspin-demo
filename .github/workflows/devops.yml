@@ -69,9 +69,6 @@ jobs:
     web_app_deploy:
       name: 📦 Deploy FrontEnd
       runs-on: ubuntu-latest
-      environment: 
-        name: Web App
-        url: https://${{env.WEB_APP_NAME}}.azurewebsites.net/
       needs: [build_web_app, code-ql]
       
       steps:  
@@ -90,9 +87,6 @@ jobs:
     aws_deploy:
       name: 📦 Deploy to AWS
       runs-on: ubuntu-latest
-      environment: 
-        name: Web App
-        url: https://${{env.WEB_APP_NAME}}.azurewebsites.net/
       needs: [build_web_app, code-ql]
       
       steps:  
@@ -106,18 +100,18 @@ jobs:
         run: |
            Compress-Archive -Path */* -DestinationPath ${{github.workspace}}/tailspinpackage
            
-      - run: ls
+      - run: ls -ltr
       
-      - name: Deploy to AWS
-        uses: einaregilsson/beanstalk-deploy@v17
-        with:
-          aws_access_key: ${{secrets.AWS_ACCESS_KEY}}
-          aws_secret_key: ${{secrets.AWS_SECRET_KEY}}
-          region: us-east-2
-          application_name: tailspin
-          environment_name: Tailspin-env-1
-          version_label: tailspin-2.0
-          deployment_package: tailspinpackage.zip
+#     - name: Deploy to AWS
+#        uses: einaregilsson/beanstalk-deploy@v17
+#        with:
+#          aws_access_key: ${{secrets.AWS_ACCESS_KEY}}
+#          aws_secret_key: ${{secrets.AWS_SECRET_KEY}}
+#          region: us-east-2
+#          application_name: tailspin
+#          environment_name: Tailspin-env-1
+#          version_label: tailspin-2.0
+#          deployment_package: tailspinpackage.zip
     
 #    validate-web:
 #      name: ✅ Validate Web Deployment
