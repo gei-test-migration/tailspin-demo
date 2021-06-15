@@ -102,16 +102,16 @@ jobs:
            
       - run: ls -ltr
       
-#     - name: Deploy to AWS
-#        uses: einaregilsson/beanstalk-deploy@v17
-#        with:
-#          aws_access_key: ${{secrets.AWS_ACCESS_KEY}}
-#          aws_secret_key: ${{secrets.AWS_SECRET_KEY}}
-#          region: us-east-2
-#          application_name: tailspin
-#          environment_name: Tailspin-env-1
-#          version_label: tailspin-2.0
-#          deployment_package: tailspinpackage.zip
+      - name: Deploy to AWS
+        uses: einaregilsson/beanstalk-deploy@v17
+        with:
+           aws_access_key: ${{secrets.AWS_ACCESS_KEY}}
+           aws_secret_key: ${{secrets.AWS_SECRET_KEY}}
+           region: us-east-2
+           application_name: tailspin
+           environment_name: Tailspin-env-1
+           version_label: tailspin-2.0
+           deployment_package: tailspinpackage.zip
     
 #    validate-web:
 #      name: ✅ Validate Web Deployment
