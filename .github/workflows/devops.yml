@@ -1,4 +1,4 @@
-name: Spacegame.Web
+name: Spacegame.Web.New
 on:
 # push:
    #branches: [trunk]
@@ -109,7 +109,7 @@ jobs:
           region: us-east-2
           application_name: tailspin
           version_label: 1.0
-          deployment_package: .
+          deployment_package: ${{github.workspace}}/*.zip
     
 #    validate-web:
 #      name: ✅ Validate Web Deployment
