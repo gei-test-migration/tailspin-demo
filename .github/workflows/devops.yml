@@ -115,7 +115,8 @@ jobs:
           aws_secret_key: ${{secrets.AWS_SECRET_KEY}}
           region: us-east-2
           application_name: tailspin
-          version_label: tailspin-1.0
+          environment_name: Tailspin-env-1
+          version_label: tailspin-2.0
           deployment_package: tailspinpackage.zip
     
 #    validate-web:
