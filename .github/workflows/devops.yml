@@ -116,7 +116,7 @@ jobs:
           region: us-east-2
           application_name: tailspin
           version_label: 1.0
-          deployment_package: ${{github.workspace}}/tailspinpackage*.zip
+          deployment_package: ${{github.workspace}}/*.zip
     
 #    validate-web:
 #      name: ✅ Validate Web Deployment
