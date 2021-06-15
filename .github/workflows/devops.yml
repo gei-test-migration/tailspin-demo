@@ -101,7 +101,12 @@ jobs:
         with:
           name: spacegameweb 
           
-      - run: ls 
+      - name: Archive 
+        shell: pwsh
+        run: |
+           Compress-Archive -Path */* -DestinationPath ${{github.workspace}}/tailspinpackage
+           
+      - run: ls
       
       - name: Deploy to AWS
         uses: einaregilsson/beanstalk-deploy@v17
@@ -111,7 +116,7 @@ jobs:
           region: us-east-2
           application_name: tailspin
           version_label: 1.0
-          deployment_package: ${{github.workspace}}/*.zip
+          deployment_package: ${{github.workspace}}/tailspinpackage*.zip
     
 #    validate-web:
 #      name: ✅ Validate Web Deployment
