@@ -115,6 +115,7 @@ jobs:
  
       name: Deploy OnPrem 
       runs-on: self-hosted
+      needs: [build_web_app, code-ql]
       steps:
       
       - name: Download a Build Artifact
