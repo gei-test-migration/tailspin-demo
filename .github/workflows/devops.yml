@@ -111,6 +111,27 @@ jobs:
            version_label: tailspin-4.0
            deployment_package: deploy.zip
     
+    web_app_OnPrem_deploy:
+ 
+      name: Deploy OnPrem 
+      runs-on: self-hosted
+      steps:
+      
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v2.0.7
+        with:
+          name: spacegameweb 
+          
+      - name: Copy to IIS Site Directory
+        run: |
+           xcopy * "C:\inetpub\wwwroot\tailspin-demo"
+     
+      - name: IIS Deploy
+        run: |
+           iisreset /stop
+           xcopy * "C:\inetpub\wwwroot\tailspin-demo"
+           iisreset /start
+    
 #    validate-web:
 #      name: ✅ Validate Web Deployment
 #      runs-on: ubuntu-latest
