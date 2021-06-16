@@ -125,7 +125,7 @@ jobs:
           
       - name: Copy to IIS Site Directory
         run: |
-           xcopy * "C:\inetpub\wwwroot\tailspin-demo"
+           xcopy * "C:\inetpub\wwwroot\tailspin-demo" /h /i /c /k /e /r /y
      
       - name: IIS Deploy
         run: |
