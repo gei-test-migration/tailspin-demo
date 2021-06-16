@@ -95,10 +95,8 @@ jobs:
         with:
           name: spacegameweb 
           
-      - name: Archive 
-        shell: pwsh
-        run: |
-           Compress-Archive -Path */* -DestinationPath ${{github.workspace}}/tailspinpackage
+      - run: |
+           zip -r deploy.zip *
            
       - run: ls -ltr
       
@@ -110,8 +108,8 @@ jobs:
            region: us-east-2
            application_name: tailspin
            environment_name: Tailspin-env-1
-           version_label: tailspin-3.0
-           deployment_package: tailspinpackage.zip
+           version_label: tailspin-4.0
+           deployment_package: deploy.zip
     
 #    validate-web:
 #      name: ✅ Validate Web Deployment
