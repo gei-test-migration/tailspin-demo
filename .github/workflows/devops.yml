@@ -69,6 +69,8 @@ jobs:
     web_app_deploy:
       name: 📦 Deploy FrontEnd
       runs-on: ubuntu-latest
+      environment: 
+        name: Web App
       needs: [build_web_app, code-ql]
       
       steps:  
@@ -87,7 +89,9 @@ jobs:
     aws_deploy:
       name: 📦 Deploy to AWS
       runs-on: ubuntu-latest
-      needs: [build_web_app, code-ql]
+      environment: 
+        name: AWS Web App
+      needs: [web_app_deploy]
       
       steps:  
       - name: Download a Build Artifact
@@ -97,8 +101,6 @@ jobs:
           
       - run: |
            zip -r deploy.zip *
-           
-      - run: ls -ltr
       
       - name: Deploy to AWS
         uses: einaregilsson/beanstalk-deploy@v17
@@ -108,40 +110,25 @@ jobs:
            region: us-east-2
            application_name: tailspin
            environment_name: Tailspin-env-1
-           version_label: tailspin-4.0
+           version_label: tailspin.${{ github.run_number }}
            deployment_package: deploy.zip
     
     web_app_OnPrem_deploy:
  
       name: Deploy OnPrem 
       runs-on: self-hosted
-      needs: [build_web_app, code-ql]
+      environment: 
+        name: Web App OnPrem  
+      needs: [aws_deploy]
       steps:
       
       - name: Download a Build Artifact
         uses: actions/download-artifact@v2.0.7
         with:
           name: spacegameweb 
-          
-      - name: Copy to IIS Site Directory
-        run: |
-           xcopy * "C:\inetpub\wwwroot\tailspin-demo" /h /i /c /k /e /r /y
      
       - name: IIS Deploy
         run: |
            iisreset /stop
-           xcopy * "C:\inetpub\wwwroot\tailspin-demo"
+            xcopy * "C:\inetpub\wwwroot\tailspin-demo" /h /i /c /k /e /r /y
            iisreset /start
-    
-#    validate-web:
-#      name: ✅ Validate Web Deployment
-#      runs-on: ubuntu-latest
-#      needs: [web_app_deploy]
-#      steps:
-#      - name: Check the deployed service URL
-#        uses: jtalk/url-health-check-action@v1.2
-#        with:
-#          url: https://${{ env.WEB_APP_NAME }}.azurewebsites.net/
-#          follow-redirect: no
-#         max-attempts: 3 
-#          retry-delay: 5s 
