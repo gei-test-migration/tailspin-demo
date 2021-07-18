@@ -1,6 +1,6 @@
-name: CheckovCI
+name: Checkov
 
-on: [push,pull_request]
+on: [push, pull_request]
 
 jobs:
   checkov-job:
@@ -14,7 +14,7 @@ jobs:
         id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
-          directory: Deployments/arm-templates
+          directory: Environments/DockerWebApp
          # check: CKV_AWS_1 # optional: run only a specific check_id. can be comma separated list
          # skip_check: CKV_AWS_1 # optional: skip a specific check_id. can be comma separated list
         #  quiet: true # optional: display only failed checks
@@ -23,4 +23,3 @@ jobs:
         #  output_format: json # optional: the output format, one of: cli, json, junitxml, github_failed_only
          # download_external_modules: true # optional: download external terraform modules from public git repositories and terraform registry
          # log_level: DEBUG # optional: set log level. Default WARNING
-          config_file: path/this_file
