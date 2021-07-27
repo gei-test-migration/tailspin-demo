@@ -13,6 +13,3 @@ New Commit
 
 Doing GitHub
 
-
-
-
