@@ -9,8 +9,3 @@
 ## Demodays
 
 
-New Commit
-
-Doing GitHub
-
-
