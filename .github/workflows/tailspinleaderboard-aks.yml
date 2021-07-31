@@ -1,4 +1,4 @@
-name: Tailspin-Leaderboard.k8s
+name: Tailspin.Leaderboard.AKS
 
 env: 
   REPO_OWNER: canarysplayground
