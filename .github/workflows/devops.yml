@@ -1,4 +1,4 @@
-name: Spacegame.Web.New
+name: Spacegame.Web-AWS
 on:
 # push:
    #branches: [trunk]
@@ -115,7 +115,7 @@ jobs:
     
     web_app_OnPrem_deploy:
  
-      name: Deploy OnPrem 
+      name: 📦 Deploy OnPrem 
       runs-on: self-hosted
       environment: 
         name: Web App OnPrem  
