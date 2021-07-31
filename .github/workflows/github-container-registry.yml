@@ -1,4 +1,4 @@
-name: Spacegame.Docker.GCR
+name: Spacegame.GCR
 
 on:
   release:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   leaderboardpush:
-    name: Docker Push GCR
+    name: 📦 Deploy to GCR
     runs-on: ubuntu-latest    
     steps:
       
