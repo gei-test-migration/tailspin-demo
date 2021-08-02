@@ -1,7 +1,6 @@
+name: Jira Workflow
 on: 
  workflow_dispatch:
-
-name: Jira Example
 
 jobs:
   build:
@@ -25,8 +24,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
         
     - name: Comment on issue
-      uses: atlassian/gajira-comment@master
+      uses: ./
       with:
-      issue: INC-2
-      comment: ${{ github.event.pusher.name }} pushed to repository: ${{ github.event.repository.full_name }}
+        issue: ${{ steps.create.outputs.issue }}
+        comment: Test comment ${{ github.event.compare }}
 
