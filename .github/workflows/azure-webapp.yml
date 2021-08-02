@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  API_APP_NAME: 'leaderboardsgh'
+  API_APP_NAME: 'leaderboardgh'
   WEB_APP_NAME: 'spacewebgh'
 
 jobs:
