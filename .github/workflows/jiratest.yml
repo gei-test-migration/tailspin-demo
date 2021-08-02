@@ -34,6 +34,7 @@ jobs:
          project: COOP
          issuetype: Task
          summary: ${{github.event.issue.title}}
-         description: ${{github.event.issue.description}}
+         description: ${{github.event.issue.body}}
+         fields: '{"assignee": "${{github.event.issue.assignee}}"}'
         env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
