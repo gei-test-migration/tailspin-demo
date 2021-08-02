@@ -2,8 +2,8 @@ name: Tailspin.Leaderboard.AKS
 
 env: 
   REPO_OWNER: canarysplayground
-  RESOURCE_GROUP: rbldemo-vaish
-  CLUSTER_NAME: tailspin-aks
+  RESOURCE_GROUP: Playground
+  CLUSTER_NAME: tailspin-cluster
 
 on:
   push:
