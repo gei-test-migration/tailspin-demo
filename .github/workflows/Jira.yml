@@ -1,4 +1,5 @@
-on: push
+on: 
+ workflow_dispatch:
 
 name: Jira Example
 
@@ -17,8 +18,15 @@ jobs:
     - name: Jira TODO
       uses: atlassian/gajira-todo@master
       with:
-        project: GA
-        issuetype: Task
+        project: COOP
+        issuetype: Story
         description: Created automatically via GitHub Actions
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
+        
+    - name: Comment on issue
+      uses: atlassian/gajira-comment@master
+      with:
+      issue: INC-2
+      comment: ${{ github.event.pusher.name }} pushed to repository: ${{ github.event.repository.full_name }}
+
