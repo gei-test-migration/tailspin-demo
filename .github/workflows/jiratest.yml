@@ -5,7 +5,7 @@ name: JIRA Test
 # Controls when the workflow will run
 on:
   issues:
-    types: [opened]
+    types: [opened,edited]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -34,6 +34,6 @@ jobs:
          project: COOP
          issuetype: Task
          summary: ${{github.event.issue.title}}
-         description: ${{github.event.issue.title}}
+         description: ${{github.event.issue.description}}
         env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
