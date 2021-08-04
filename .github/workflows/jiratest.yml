@@ -35,7 +35,6 @@ jobs:
          issuetype: Task
          summary: ${{github.event.issue.title}}
          description: ${{github.event.issue.body}}
-         labels: ${{github.event.issue.labels}}
          fields: '{"assignee": "${{github.event.issue.assignee}}"}' # not working
         env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
