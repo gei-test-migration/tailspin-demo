@@ -5,7 +5,7 @@ name: JIRA Test
 # Controls when the workflow will run
 on:
   issues:
-    types: [opened,closed]
+    types: [opened]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -16,7 +16,6 @@ jobs:
   issuecreation:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    if: github.event.issue.opened 
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -42,7 +41,7 @@ jobs:
       
   issueclose:
     runs-on: ubuntu-latest
-    if: github.event.issue.closed 
+    if: github.event.issue.closed == 'true'
     steps:
     
     - name: Transition issue
