@@ -1,7 +1,7 @@
 name: Spacegame.Web
 on:
 # push:
-   #branches: [trunk]
+   #branches: [ main ]
    #paths-ignore:
    #- .github/**
   workflow_dispatch:
