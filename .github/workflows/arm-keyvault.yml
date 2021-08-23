@@ -2,7 +2,7 @@ name: AzureARM-CICD
 on:
   workflow_dispatch:
   push:
-    branches: [trunk]
+    branches: [ main ]
 
 jobs:
   build_api_app:
