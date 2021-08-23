@@ -39,6 +39,7 @@ jobs:
     - name: Comment on issue
       uses: ./
       with:
+      
         issue: ${{ steps.create.outputs.issue }}
         comment: Test comment ${{ github.event.compare }}
 
