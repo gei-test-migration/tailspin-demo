@@ -1,7 +1,7 @@
 name: Anchore Container Scan
 on:
   pull_request:
-    branches: [ trunk ]
+    branches: [ main ]
   schedule:
   - cron: '00 19 * * 5'
   workflow_dispatch:
