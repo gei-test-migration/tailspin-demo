@@ -45,6 +45,7 @@ jobs:
      
       name: deploy to local
       runs-on: self-hosted
+      needs:  build_api_app
       
       steps:
       
