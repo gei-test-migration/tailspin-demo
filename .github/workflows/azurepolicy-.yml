@@ -15,4 +15,4 @@ jobs:
       uses: azure/policy-compliance-scan@v0
       with:
         scopes: |
-          /subscriptions/33a54cdd-4719-421e-b20f-582606580277/resourceGroups/tailspin-demo/providers/Microsoft.Web/sites/spacewebgh-webapp
+          /subscriptions/4bab3646-2d9b-49e6-8afe-9363cd107f37/resourceGroups/Playground
