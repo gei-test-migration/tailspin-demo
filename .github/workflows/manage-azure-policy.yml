@@ -1,4 +1,4 @@
-name: Run-Azure-Policy
+name: Run Azure Policy
 on:
   workflow_dispatch:
     inputs:
@@ -30,12 +30,14 @@ jobs:
   apply-azure-policy:
     runs-on: ubuntu-latest
     steps:
+    
     - name: Checkout
       uses: actions/checkout@v2
+    
     - name: Login to Azure
       uses: azure/login@v1
       with:
-        creds: ${{secrets.AZURE_CREDENTIALS_a6c4c747}}
+        creds: ${{secrets.AZURE_CREDS}}
         allow-no-subscriptions: true
     - name: Create or Update Azure Policies
       uses: azure/manage-azure-policy@v0
