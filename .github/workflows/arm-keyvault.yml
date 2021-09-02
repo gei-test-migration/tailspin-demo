@@ -65,11 +65,11 @@ jobs:
           path: ./Tailspin.SpaceGame.Web/bin/Release/netcoreapp3.1/publish/
 
   deploy:
-    name: Create and Deploy resources
+    name: 📦 Create and Deploy resources
     runs-on: ubuntu-latest
-    needs: [build_api_app,build_web_app]
+    needs: [ build_api_app,build_web_app ]
     environment: 
-      name: ARM-KEYVAULT
+      name: Azure-IaaC
       url: https://${{steps.arm_deploy.outputs.webappname}}.azurewebsites.net
     steps:
     - uses: actions/checkout@v2
@@ -107,7 +107,7 @@ jobs:
         parameters: Deployments/arm-templates/azuredeploy.parameters.json
         deploymentMode: Complete
            
-    - name: Api Deploy
+    - name: API Deploy
       uses: Azure/webapps-deploy@v2
       with:
         app-name: ${{steps.arm_deploy.outputs.apiappname}}
