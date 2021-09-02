@@ -18,5 +18,5 @@ jobs:
       uses: azure/policy-compliance-scan@v0
       with:
         scopes: |
-          /subscriptions/${{secrets.AZURESUBID}}/resourceGroups/SQLServer
+          /subscriptions/${{secrets.AZURESUBID}}/resourceGroups/Playground
         
