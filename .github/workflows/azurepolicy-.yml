@@ -1,8 +1,9 @@
-name: Compliance-Check
+name: Azure Policy Compliance Scan
 on: push
 
 jobs:
-  assess-policy-compliance:    
+  assess-policy-compliance:
+    name: Azure Policy Compliance Scan
     runs-on: ubuntu-latest
     steps:
     # Azure Login       
