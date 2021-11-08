@@ -1,0 +1,8 @@
+Azure DevOps Personal Access Token
+f4xrcevnn67o2moostrjqg7xp7xrfg37r75na6uhtrf5vsofhhbq
+
+Azure SQL Connection String
+Server=tcp:mysqldemos.database.windows.net,1433;Initial Catalog=bikesharingprivateweb;Persist Security Info=False;User ID=vatsa;Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+
+GitHub PAT
+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
