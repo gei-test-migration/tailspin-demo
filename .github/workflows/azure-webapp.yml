@@ -202,7 +202,7 @@ jobs:
         with:
           app-name: ${{env.WEB_APP_NAME}}
           package: . 
-          publish-profile: ${{ secrets.APP-service }}
+          publish-profile: ${{ secrets.APPservice }}
     
     validate-web:
       name: ✅ Validate Web Deployment
