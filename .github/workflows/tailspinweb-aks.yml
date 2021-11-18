@@ -89,6 +89,7 @@ jobs:
       name: AKS Cluster
       url: http://20.75.132.126/
     runs-on: ubuntu-latest
+    continue-on-error: true
     needs: anchore
     steps:
     
