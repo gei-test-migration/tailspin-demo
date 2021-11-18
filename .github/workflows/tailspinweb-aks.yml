@@ -61,6 +61,7 @@ jobs:
     name: 🔆 Anchore Analyse
     needs: dockerpush
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:  
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
@@ -89,7 +90,6 @@ jobs:
       name: AKS Cluster
       url: http://20.75.132.126/
     runs-on: ubuntu-latest
-    continue-on-error: true
     needs: anchore
     steps:
     
