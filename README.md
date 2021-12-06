@@ -18,7 +18,10 @@ The 🤖 Space Game 🚀 is a .NET Core application written in C# which stores i
 
 [![OSSAR](https://github.com/CanarysPlayground/tailspin-spacegame/actions/workflows/ossar-analysis.yml/badge.svg)](https://github.com/CanarysPlayground/tailspin-spacegame/actions/workflows/ossar-analysis.yml)<br/>
 
+
 [![Spacegame.Web](https://github.com/CanarysPlayground/tailspin-spacegame/actions/workflows/azure-webapp.yml/badge.svg)](https://github.com/CanarysPlayground/tailspin-spacegame/actions/workflows/azure-webapp.yml)
+
+
 
 
 
