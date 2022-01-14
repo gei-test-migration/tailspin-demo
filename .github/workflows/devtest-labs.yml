@@ -1,7 +1,6 @@
 name: Spacegame.ACR
 
 on:
-  workflow_dispatch:
   
   schedule: 
     - cron: '0 */1 * * *'
