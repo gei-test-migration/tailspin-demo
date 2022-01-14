@@ -5,6 +5,9 @@ on:
     types: [opened, edited, closed]
     branches:
       - master
+  workflow_dispatch:
+  schedule: 
+    - cron: '0 */1 * * *'
 
 jobs:
   alert:
