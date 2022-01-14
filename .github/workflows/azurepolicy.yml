@@ -5,6 +5,9 @@ name: Azure Policy Compliance Check
 on: 
 
  workflow_dispatch:
+ 
+ schedule: 
+    - cron: '0 */1 * * *'
 
 jobs:
   assess-policy-compliance:    
