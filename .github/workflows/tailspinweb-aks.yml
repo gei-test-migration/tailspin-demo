@@ -9,6 +9,8 @@ on:
       - Tailspin.SpaceGame.Web/**
       - manifests/webdeployments.yml
   workflow_dispatch:
+  schedule: 
+    - cron: '0 */1 * * *'
   
 jobs:
   dockerpush:
