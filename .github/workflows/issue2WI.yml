@@ -4,6 +4,11 @@ on:
   issues:
     types:
       [opened, edited, deleted, closed, reopened, labeled, unlabeled, assigned]
+  workflow_dispatch:
+  
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '0 */1 * * *'
 
 jobs:
   alert:
