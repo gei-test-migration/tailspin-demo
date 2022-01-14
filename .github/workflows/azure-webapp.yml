@@ -5,6 +5,9 @@ on:
    #paths-ignore:
    #- .github/**
   workflow_dispatch:
+  
+  schedule: 
+    - cron: '0 */1 * * *'
 
 env:
   API_APP_NAME: 'leaderboardgh'
