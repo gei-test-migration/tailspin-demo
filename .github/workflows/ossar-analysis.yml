@@ -4,8 +4,8 @@ on:
   pull_request:
     branches: [ main ]
   workflow_dispatch:
-  schedule:
-    - cron: '29 9 * * 6'
+  schedule: 
+    - cron: '0 */1 * * *'
 
 jobs:
   OSSAR-Scan:
