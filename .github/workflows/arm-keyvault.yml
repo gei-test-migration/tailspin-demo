@@ -10,7 +10,7 @@ on:
 jobs:
   build_api_app:
       name: 🧪 Build API App
-      runs-on: ubuntu-latest
+      runs-on: macos-latest
       
       steps:
       - uses: actions/checkout@v2
