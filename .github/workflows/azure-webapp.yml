@@ -7,7 +7,7 @@ on:
  
 env:
   API_APP_NAME: 'leaderboardgh'
-  WEB_APP_NAME: 'tailspinexl'
+  WEB_APP_NAME: 'spacegamegh'
 
 jobs:
     build_api_app:
@@ -180,7 +180,7 @@ jobs:
         with:
           app-name: ${{env.API_APP_NAME}}
           package: .
-          publish-profile: ${{ secrets.APP-service}}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_LEADERBOARDGH}}
 
     web_app_deploy:
       name: 📦 Deploy FrontEnd
@@ -201,7 +201,7 @@ jobs:
         with:
           app-name: ${{env.WEB_APP_NAME}}
           package: . 
-          publish-profile: ${{ secrets.APPSERVICENEW }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_SPACEGH }}
     
     validate-web:
       name: ✅ Validate Web Deployment
