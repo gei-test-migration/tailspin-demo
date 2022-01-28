@@ -5,9 +5,6 @@ on:
     types:
       [opened, edited, deleted, closed, reopened, labeled, unlabeled, assigned]
   workflow_dispatch:
-  
-  schedule:
-    - cron:  '0 */1 * * *'
 
 jobs:
   alert:
