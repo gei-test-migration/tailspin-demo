@@ -2,8 +2,8 @@ name: Spacegame.Web
 on:
  push:
    branches: [ main ]
-   #paths-ignore:
-   #- .github/**
+   paths-ignore:
+    - .github/**
 env:
   API_APP_NAME: 'leaderboardgh'
   WEB_APP_NAME: 'spacegamegh'
