@@ -6,8 +6,6 @@ on:
     branches:
       - master
   workflow_dispatch:
-  schedule: 
-    - cron: '0 */1 * * *'
 
 jobs:
   alert:
@@ -19,7 +17,7 @@ jobs:
         github_token: '${{ secrets.GH_TOKEN }}'    
         ado_organization: 'devopsagile'
         ado_project: 'AzureDevOps'
-        ado_wit: 'User Story' 
+        ado_wit: 'Pull Request' 
         ado_new_state: 'New'
         ado_active_state: 'Active'
         ado_close_state: 'Closed'
