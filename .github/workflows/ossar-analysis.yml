@@ -5,7 +5,7 @@ on:
     branches: [ main ]
   workflow_dispatch:
   schedule: 
-    - cron: '0 */1 * * *'
+    - cron: '29 9 * * 6'
 
 jobs:
   OSSAR-Scan:
