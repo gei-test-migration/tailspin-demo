@@ -3,10 +3,7 @@ name: Spacegame.GCR
 on:
   release:
     types: [published]
-    
-  schedule: 
-    - cron: '0 */1 * * *'
-    
+
   workflow_dispatch:
 
 jobs:
