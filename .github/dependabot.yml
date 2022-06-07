@@ -1,13 +1,16 @@
 version: 2
 updates:
-  - package_manager: "javascript"
+  - package-ecosystem: "javascript"
     directory: "/"
-    update_schedule: "daily"
+    schedule:
+      interval: "daily"
 
-  - package_manager: "dotnet:nuget"
+  - package-ecosystem: "dotnet:nuget"
     directory: "/Tailspin.SpaceGame.LeaderboardContainer/"
-    update_schedule: "daily"
+    schedule:
+      interval: "daily"
 
-  - package_manager: "dotnet:nuget"
+  - package-ecosystem: "dotnet:nuget"
     directory: "/Tailspin.SpaceGame.Web/"
-    update_schedule: "daily"
+    schedule:
+      interval: "daily"
