@@ -38,7 +38,7 @@ jobs:
           file: ./Tailspin.SpaceGame.LeaderboardContainer/Dockerfile
           push: true
           tags: |
-            ghcr.io/canarysplayground/leaderboard-dev:latest
+            ghcr.io/canarysplayground/leaderboard-dev:latest  
             ghcr.io/canarysplayground/leaderboard-dev:${{ steps.date.outputs.date }}.${{ github.run_number }}
        
       - name: Image digest
