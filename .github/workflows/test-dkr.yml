@@ -1,4 +1,4 @@
-name: CI-vatsa
+name: CI-dkr
 
 on:
   push:
