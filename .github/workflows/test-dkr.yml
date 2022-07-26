@@ -38,8 +38,8 @@ jobs:
           file: ./Tailspin.SpaceGame.LeaderboardContainer/Dockerfile
           push: true
           tags: |
-            ghcr.io/CanarysPlayground/leaderboard-dev:latest
-            ghcr.io/CanarysPlayground:${{ steps.date.outputs.date }}.${{ github.run_number }}
+            ghcr.io/canarysplayground/leaderboard-dev:latest
+            ghcr.io/canarysplayground:${{ steps.date.outputs.date }}.${{ github.run_number }}
        
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
