@@ -39,7 +39,7 @@ jobs:
           push: true
           tags: |
             ghcr.io/canarysplayground/leaderboard-dev:latest
-            ghcr.io/canarysplayground:${{ steps.date.outputs.date }}.${{ github.run_number }}
+            ghcr.io/canarysplayground/leaderboard-dev:${{ steps.date.outputs.date }}.${{ github.run_number }}
        
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
