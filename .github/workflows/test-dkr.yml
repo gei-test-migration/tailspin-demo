@@ -24,7 +24,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.DOCKER_PAT }}
+          password: ${{ secrets.DOCKER_TEST_PAT }}
           
       - name: Get current date
         id: date
@@ -39,7 +39,7 @@ jobs:
           push: true
           tags: |
             ghcr.io/canarysplayground/leaderboard-dev:latest  
-            ghcr.io/canarysplayground/leaderboard-dev:${{ steps.date.outputs.date }}
+            ghcr.io/canarysplayground/leaderboard-dev:${{ steps.date.outputs.date }}.${{ github.run_number }}
        
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
