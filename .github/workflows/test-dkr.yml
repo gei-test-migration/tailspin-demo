@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  test:
+  build:
     name: 📦 GCR
     runs-on: ubuntu-latest    
     steps:
@@ -39,9 +39,20 @@ jobs:
           push: true
           tags: |
             ghcr.io/canarysplayground/leaderboard/dev:latest  
-            ghcr.io/canarysplayground/leaderboard/dev:${{ steps.date.outputs.date }}.${{ github.run_number }}
+            ghcr.io/canarysplayground/leaderboard/dev:${{ github.sha }}
        
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
 
+  deploy-dev:
+    name: Deploy to DEV
+    runs-on: ubuntu-latest
 
+    steps:
+
+    - uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'mytestdkr'
+        publish-profile: ${{ secrets.azureWebAppPublishProfile }}
+        images: 'ghcr.io/canarysplayground/leaderboard/dev:${{ github.sha }}'
+  
