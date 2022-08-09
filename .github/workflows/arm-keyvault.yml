@@ -38,7 +38,7 @@ jobs:
 
   build_web_app:
       name: 🧪 Build Web App
-      runs-on: ubuntu-latest
+      runs-on: macos-latest
       steps:
       - uses: actions/checkout@v2
         
@@ -67,7 +67,7 @@ jobs:
 
   deploy:
     name: 📦 Create and Deploy resources
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     needs: [ build_api_app,build_web_app ]
     environment: 
       name: Azure-IaaC
