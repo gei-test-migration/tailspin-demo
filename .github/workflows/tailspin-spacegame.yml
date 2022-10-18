@@ -1,0 +1,32 @@
+name: canarysdevops/tailspin-spacegame
+on:
+  push:
+  workflow_dispatch:
+concurrency:
+  group: "${{ github.ref }}"
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/dotnet/sdk:latest
+    timeout-minutes: 60
+    env:
+      OBJECTS_DIRECTORY: obj
+      NUGET_PACKAGES_DIRECTORY: ".nuget"
+      SOURCE_CODE_PATH: "*/*/"
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 20
+        lfs: true
+    - uses: actions/cache@v2
+      with:
+        path: |-
+          $SOURCE_CODE_PATH$OBJECTS_DIRECTORY/project.assets.json
+          $SOURCE_CODE_PATH$OBJECTS_DIRECTORY/*.csproj.nuget.*
+          $NUGET_PACKAGES_DIRECTORY
+        key: "$CI_JOB_STAGE-${{ github.ref }}"
+    - run: dotnet restore --packages $NUGET_PACKAGES_DIRECTORY
+    - run: dotnet build --no-restore
+    - run: dotnet test --no-restore
