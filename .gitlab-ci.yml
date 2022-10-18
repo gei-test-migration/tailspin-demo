@@ -18,11 +18,10 @@
 # See other available tags for .NET Core: https://hub.docker.com/_/microsoft-dotnet
 # Learn more about Docker tags: https://docs.docker.com/glossary/?term=tag
 # and the Docker itself: https://opensource.com/resources/what-docker
+image: mcr.microsoft.com/dotnet/sdk:latest
 
 # ### Define variables
-
-image: ubuntu:latest
-
+#
 variables:
   # 1) Name of directory where restore and build objects are stored.
   OBJECTS_DIRECTORY: 'obj'
@@ -85,18 +84,8 @@ cache:
 # in the root of project repository, so its content can be cached.
 #
 # Learn more about GitLab cache: https://docs.gitlab.com/ee/ci/caching/index.html
-
 before_script:
-  - 'apt-get update'
-  - 'apt-get install -y wget'
-  - 'wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb'
-  - 'dpkg -i packages-microsoft-prod.deb'
-  - 'apt-get update'
-  - 'apt install -y apt-transport-https'
-  - 'apt-get update'
-  - 'apt install -y dotnet6'
-  - 'apt install -y aspnetcore-runtime-6.0=6.0.8-1 dotnet-apphost-pack-6.0=6.0.8-1 dotnet-host=6.0.8-1 dotnet-hostfxr-6.0=6.0.8-1 dotnet-runtime-6.0=6.0.8-1 dotnet-sdk-6.0=6.0.400-1 dotnet-targeting-pack-6.0=6.0.8-1 --allow-downgrades'
-  - 'dotnet restore'
+  - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
 
 build:
   stage: build
@@ -110,5 +99,5 @@ build:
   # path to the directory where it is located (e.g. 'dotnet build ./src/ConsoleApp').
   # Only one project path can be passed as a parameter to 'dotnet build' command.
   script:
-    - 'dotnet build'
+    - 'dotnet build --no-restore'
     - 'dotnet test --no-restore'
