@@ -18,10 +18,15 @@
 # See other available tags for .NET Core: https://hub.docker.com/_/microsoft-dotnet
 # Learn more about Docker tags: https://docs.docker.com/glossary/?term=tag
 # and the Docker itself: https://opensource.com/resources/what-docker
-image: mcr.microsoft.com/dotnet/sdk:latest
 
 # ### Define variables
 #
+
+stages:
+  - restore
+  - build
+  - test
+
 variables:
   # 1) Name of directory where restore and build objects are stored.
   OBJECTS_DIRECTORY: 'obj'
@@ -84,7 +89,10 @@ cache:
 # in the root of project repository, so its content can be cached.
 #
 # Learn more about GitLab cache: https://docs.gitlab.com/ee/ci/caching/index.html
-before_script:
+restore:
+  stage: restore
+  image: mcr.microsoft.com/dotnet/sdk:latest
+  script:
   - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
 
 build:
@@ -98,11 +106,13 @@ build:
   # or build every .NET Core-based project by explicitly specifying a relative
   # path to the directory where it is located (e.g. 'dotnet build ./src/ConsoleApp').
   # Only one project path can be passed as a parameter to 'dotnet build' command.
+  image: mcr.microsoft.com/dotnet/sdk:latest
   script:
     - 'dotnet build --no-restore'
 
 tests:
   stage: test
+  image: mcr.microsoft.com/dotnet/sdk:latest
   # ### Run the tests
   #
   # You can either run tests for all test projects that are defined in your solution
