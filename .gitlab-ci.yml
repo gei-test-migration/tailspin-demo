@@ -88,6 +88,7 @@ cache:
 
 before_script:
   - 'apt-get update'
+  - 'apt-get install wget'
   - 'wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb'
   - 'dpkg -i packages-microsoft-prod.deb'
   - 'apt install apt-transport-https'
