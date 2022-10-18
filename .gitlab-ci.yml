@@ -21,6 +21,8 @@
 
 # ### Define variables
 
+image: ubuntu:latest
+
 variables:
   # 1) Name of directory where restore and build objects are stored.
   OBJECTS_DIRECTORY: 'obj'
