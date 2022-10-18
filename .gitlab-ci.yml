@@ -95,7 +95,7 @@ before_script:
   - 'apt install -y apt-transport-https'
   - 'apt-get update'
   - 'apt install -y dotnet6'
-  - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
+  - 'dotnet restore'
 
 build:
   stage: build
