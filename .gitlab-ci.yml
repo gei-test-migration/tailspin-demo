@@ -108,7 +108,7 @@ build:
   # Only one project path can be passed as a parameter to 'dotnet build' command.
   image: mcr.microsoft.com/dotnet/sdk:latest
   script:
-    - 'dotnet build --no-restore'
+    - 'dotnet build'
 
 tests:
   stage: test
