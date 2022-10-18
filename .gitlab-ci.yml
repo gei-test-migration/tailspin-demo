@@ -111,17 +111,4 @@ build:
   # Only one project path can be passed as a parameter to 'dotnet build' command.
   script:
     - 'dotnet build'
-
-tests:
-  stage: test
-  image: mcr.microsoft.com/dotnet/sdk:latest
-  # ### Run the tests
-  #
-  # You can either run tests for all test projects that are defined in your solution
-  # with 'dotnet test' or run tests only for specific project by specifying
-  # a relative path to the directory where it is located (e.g. 'dotnet test ./test/UnitTests').
-  #
-  # You may want to define separate testing jobs for different types of testing
-  # (e.g. integration tests, unit tests etc).
-  script:
     - 'dotnet test --no-restore'
