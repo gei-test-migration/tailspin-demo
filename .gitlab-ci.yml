@@ -89,12 +89,12 @@ cache:
 before_script:
   - 'apt-get update'
   - 'apt-get install -y wget'
-  - 'wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb'
+  - 'wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb'
   - 'dpkg -i packages-microsoft-prod.deb'
   - 'apt-get update'
   - 'apt install -y apt-transport-https'
   - 'apt-get update'
-  - 'apt install -y dotnet-sdk-3.1'
+  - 'apt install -y dotnet6'
   - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
 
 build:
