@@ -1,4 +1,4 @@
-name: Tailspin-Web.k8s
+name: Tailspin-Web.k8s.gcr
 
 on:
   push: 
